@@ -16783,7 +16783,7 @@
 	)
 	(symbol
 		(lib_id "Potentiometer_Digital:MCP4132-xxxx-P")
-		(at 143.51 90.17 0)
+		(at 152.4 86.36 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -16792,7 +16792,7 @@
 		(fields_autoplaced yes)
 		(uuid "ef78fcea-3084-4be8-ba35-68d68366133d")
 		(property "Reference" "U1"
-			(at 145.6533 77.47 0)
+			(at 154.5433 73.66 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -16801,7 +16801,7 @@
 			)
 		)
 		(property "Value" "MCP4132-xxxx-P"
-			(at 145.6533 80.01 0)
+			(at 154.5433 76.2 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -16810,7 +16810,7 @@
 			)
 		)
 		(property "Footprint" "Package_DIP:DIP-8_W7.62mm"
-			(at 143.51 110.49 0)
+			(at 152.4 106.68 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -16819,7 +16819,7 @@
 			)
 		)
 		(property "Datasheet" "https://ww1.microchip.com/downloads/aemDocuments/documents/OTH/ProductDocuments/DataSheets/22060b.pdf"
-			(at 143.51 113.03 0)
+			(at 152.4 109.22 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -16828,7 +16828,7 @@
 			)
 		)
 		(property "Description" "Single Digital Rheostat, SPI interface, 129 taps, 5/10/50/100 kohm, volatile memory"
-			(at 143.51 115.57 0)
+			(at 152.4 111.76 0)
 			(effects
 				(font
 					(size 1.27 1.27)
