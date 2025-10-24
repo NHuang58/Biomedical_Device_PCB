@@ -1,4 +1,4 @@
-26643415281671866
+26643415303233097
 Audio_Module
 Reverb_BTDR-1H
 Digital Reverberation Unit, http://www.belton.co.kr/inc/downfile.php?seq=17&file=pdf (footprint from http://www.uk-electronic.de/PDF/BTDR-1.pdf)
@@ -106267,19 +106267,19 @@ BAT_504
 2
 2
 footprints
+FFC_84952-8
+
+
+0
+10
+10
+footprints
 FFC_522711279
 
 
 0
 14
 14
-footprints
-FPC_1-84952-8
-
-
-0
-20
-20
 footprints
 NMOS_DMP1045U
 
