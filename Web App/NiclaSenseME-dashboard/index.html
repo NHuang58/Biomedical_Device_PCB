@@ -40,6 +40,21 @@
       cursor: pointer;
     }
 
+    .button-style {
+      background-color: #d8f41d;
+      border: none;
+      color: black;
+      padding: 1px;
+      text-align: center;
+      text-decoration: none;
+      margin: 8px 18px;
+      height: 25px;
+      width: 100px;
+      border-radius: 20px;
+      cursor: pointer;
+      outline: none;
+    }
+
     .container {
       width: 960px;
       height: 384px;
@@ -209,11 +224,14 @@
   <div class="container">
 
     <div id="snackbar"></div>
+    
     <div class="status widget">
       <button id="pairButton">CONNECT</button>
       <div class="label statusBar" id="bluetooth">Click the connect button to connect your device</div>
-      <img src="Logo-Arduino-Pro-inline.svg" style="position: inherit;padding-right: 0px;filter: invert(100%);float: right; grid-column: 3; width: 80%; margin-top: 8.5%;" />
+      
+      <button id="exportButton" class="button-style" style="grid-column: 3;">EXPORT</button>
     </div>
+
 
     <div class="square widget" id="3d">
       <div class="label">&#128230; Quaternion Rotation</div>
@@ -754,6 +772,102 @@
     } else { skip_frame = false; }
     requestAnimationFrame(draw);
   }
+
+  // =============================
+  // EXPORT BUTTON
+  // =============================
+
+  // Helper: create and download CSV
+  function downloadCSV(filename, content) {
+    const blob = new Blob([content], { type: 'text/csv' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  }
+
+  // Helper: generate CSV text from NiclaSenseME (all sensor values on same row)
+  function generateCSV(secondsBack, sampleInterval) {
+    const now = Date.now();
+    const samplesPerSecond = 1000 / sampleInterval;
+    const timeWindow = Math.floor(secondsBack * samplesPerSecond);
+
+    // Collect all unique field names
+    const fieldNames = [];
+    for (const sensor in NiclaSenseME) {
+      const sensorData = NiclaSenseME[sensor]?.data;
+      if (!sensorData) continue;
+      for (const field in sensorData) {
+        const columnName = `${sensor}_${field}`;
+        if (!fieldNames.includes(columnName)) fieldNames.push(columnName);
+      }
+    }
+
+    // CSV header
+    let csv = 'timestamp,' + fieldNames.join(',') + '\n';
+
+    // Determine maximum number of samples available among all fields
+    const maxSamples = Math.min(
+      ...Object.values(NiclaSenseME)
+        .map(sensor => {
+          const sensorData = sensor?.data;
+          if (!sensorData) return Infinity;
+          return Math.max(...Object.values(sensorData).map(arr => arr.length));
+        })
+        .filter(v => v > 0)
+    );
+
+    const numSamples = Math.min(timeWindow, maxSamples);
+
+    // Loop over time samples
+    for (let i = numSamples - 1; i >= 0; i--) {
+      const timestamp = new Date(now - (numSamples - 1 - i) * sampleInterval).toISOString();
+      const row = [timestamp];
+
+      fieldNames.forEach(name => {
+        const [sensor, field] = name.split('_');
+        const arr = NiclaSenseME[sensor]?.data?.[field];
+        if (arr && arr.length > numSamples - i - 1) {
+          const value = arr[arr.length - numSamples + i];
+          row.push(value);
+        } else {
+          row.push('');
+        }
+      });
+
+      csv += row.join(',') + '\n';
+    }
+
+    return csv;
+  }
+  
+  // Popup UI and export trigger
+  document.getElementById('exportButton').addEventListener('click', async () => {
+    const secondsStr = prompt('Enter how much time of data to export (in seconds):', '60');
+    if (!secondsStr) return;
+    const secondsBack = parseFloat(secondsStr);
+
+    const sampleStr = prompt('Enter sampling interval (in milliseconds):', '500');
+    if (!sampleStr) return;
+    const sampleInterval = parseFloat(sampleStr);
+
+    if (isNaN(secondsBack) || isNaN(sampleInterval) || secondsBack <= 0 || sampleInterval <= 0) {
+      alert('Please enter valid positive numbers.');
+      return;
+    }
+
+    const csvData = generateCSV(secondsBack, sampleInterval);
+    const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
+    const filename = `NiclaData.csv`;
+    downloadCSV(filename, csvData);
+
+    snack(`Exported last ${secondsBack}s of data`, 0);
+  });
+
 
   initGraph('gyroscope');
   initGraph('accelerometer');

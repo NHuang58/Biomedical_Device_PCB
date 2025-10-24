@@ -5,8 +5,10 @@ from bleak import BleakClient, BleakScanner
 
 GYRO_UUID = "19b10000-6001-537e-4f6c-d104768a1214"
 TEMP_UUID = "19b10000-2001-537e-4f6c-d104768a1214"
+sleep_time = 0.5  # seconds
 
-output_file = f"nicla_data_{datetime.datetime.now().strftime('%Y%m%d_%H%M%S')}.csv"
+# output_file = f"nicla_data_{datetime.datetime.now().strftime('%Y%m%d_%H%M%S')}.csv"
+output_file = f"nicla_data.csv"
 fieldnames = ["timestamp", "gyro_x", "gyro_y", "gyro_z", "temperature_C"]
 
 gyro_data = [0.0, 0.0, 0.0]
@@ -47,7 +49,8 @@ async def log_data():
             await client.start_notify(GYRO_UUID, gyro_handler)
             await client.start_notify(TEMP_UUID, temp_handler)
             print("Logging data... Press Ctrl+C to stop.")
+            
             while True:
-                await asyncio.sleep(0.1)
+                await asyncio.sleep(sleep_time)
 
 asyncio.run(log_data())
