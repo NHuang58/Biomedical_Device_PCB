@@ -8,7 +8,11 @@ TEMP_UUID = "19b10000-2001-537e-4f6c-d104768a1214"
 sleep_time = 0.5  # seconds
 
 # output_file = f"nicla_data_{datetime.datetime.now().strftime('%Y%m%d_%H%M%S')}.csv"
-output_file = f"nicla_data.csv"
+
+# CHANGE OUTPUT FILE BELOW
+output_file = f"nicla_data_live.csv"
+# CHANGE OUTPUT FILE ABOVE
+
 fieldnames = ["timestamp", "gyro_x", "gyro_y", "gyro_z", "temperature_C"]
 
 gyro_data = [0.0, 0.0, 0.0]
