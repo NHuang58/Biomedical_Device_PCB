@@ -3003,8 +3003,8 @@
 		(uuid ab38efa9-d776-417b-8575-adfdbd08780a)
 	)
 	(rectangle
-		(start 204.47 88.9)
-		(end 281.94 144.78)
+		(start 200.66 92.71)
+		(end 278.13 151.13)
 		(stroke
 			(width 0)
 			(type default)
@@ -3026,7 +3026,7 @@
 	)
 	(text "*Digital Voltage\n"
 		(exclude_from_sim no)
-		(at 239.014 115.57 0)
+		(at 235.204 119.38 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3046,7 +3046,7 @@
 	)
 	(text "Global Labels"
 		(exclude_from_sim no)
-		(at 212.344 87.122 0)
+		(at 208.534 90.932 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3068,7 +3068,7 @@
 	)
 	(text "Analog Inputs\n"
 		(exclude_from_sim no)
-		(at 215.138 91.694 0)
+		(at 211.328 95.504 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3078,7 +3078,7 @@
 	)
 	(text "*3.3 - 3.7 V"
 		(exclude_from_sim no)
-		(at 237.998 110.744 0)
+		(at 234.188 114.554 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3108,7 +3108,7 @@
 	)
 	(text "Digital Inputs"
 		(exclude_from_sim no)
-		(at 258.064 91.694 0)
+		(at 254.254 95.504 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3119,7 +3119,7 @@
 	)
 	(text "Force Signals"
 		(exclude_from_sim no)
-		(at 217.678 130.302 0)
+		(at 213.868 134.112 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3199,7 +3199,7 @@
 	)
 	(text "Power Signals"
 		(exclude_from_sim no)
-		(at 216.916 107.188 0)
+		(at 213.106 110.998 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -19584,7 +19584,7 @@
 	)
 	(global_label "5{slash}LPIO0"
 		(shape input)
-		(at 261.62 120.65 0)
+		(at 257.81 124.46 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -19594,7 +19594,7 @@
 		)
 		(uuid "00a163b5-26cd-4647-84de-a73be9ab9382")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 272.5881 120.65 0)
+			(at 268.7781 124.46 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -19606,7 +19606,7 @@
 	)
 	(global_label "2{slash}LPIO1{slash}TX"
 		(shape input)
-		(at 261.62 105.41 0)
+		(at 257.81 109.22 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -19616,7 +19616,7 @@
 		)
 		(uuid "02af77ca-2c02-4816-83fe-8deeaaaf1776")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 276.0957 105.41 0)
+			(at 272.2857 109.22 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -19628,7 +19628,7 @@
 	)
 	(global_label "6{slash}CS"
 		(shape input)
-		(at 261.62 125.73 0)
+		(at 257.81 129.54 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -19638,7 +19638,7 @@
 		)
 		(uuid "088f5110-274d-40b3-af98-722d6692a894")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 269.6247 125.73 0)
+			(at 265.8147 129.54 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -19738,7 +19738,7 @@
 	)
 	(global_label "0{slash}LPIO3"
 		(shape input)
-		(at 261.62 95.25 0)
+		(at 257.81 99.06 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -19748,7 +19748,7 @@
 		)
 		(uuid "1471de48-60e7-45bc-aaab-e300920c02ff")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 272.5881 95.25 0)
+			(at 268.7781 99.06 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -19894,7 +19894,7 @@
 	)
 	(global_label "10{slash}A0"
 		(shape input)
-		(at 218.44 95.25 0)
+		(at 214.63 99.06 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -19904,7 +19904,7 @@
 		)
 		(uuid "2ca1b066-4f2d-4c13-adeb-c6cbf36a87b3")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 227.4728 95.25 0)
+			(at 223.6628 99.06 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -20004,7 +20004,7 @@
 	)
 	(global_label "9{slash}SCLK"
 		(shape input)
-		(at 261.62 130.81 0)
+		(at 257.81 134.62 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -20014,7 +20014,7 @@
 		)
 		(uuid "606fe237-0a3d-4ae7-afe2-8296402ecd75")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 271.9228 130.81 0)
+			(at 268.1128 134.62 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -20048,7 +20048,7 @@
 	)
 	(global_label "FORCE+"
 		(shape input)
-		(at 218.44 134.62 0)
+		(at 214.63 138.43 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -20058,7 +20058,7 @@
 		)
 		(uuid "643f2406-b49d-4cca-8bfb-87219e526d98")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 229.1057 134.62 0)
+			(at 225.2957 138.43 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -20114,7 +20114,7 @@
 	)
 	(global_label "VBAT"
 		(shape input)
-		(at 218.44 110.49 0)
+		(at 214.63 114.3 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -20124,7 +20124,7 @@
 		)
 		(uuid "803ffed3-4b57-45cf-a17f-65eb570d972a")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 225.84 110.49 0)
+			(at 222.03 114.3 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -20423,7 +20423,7 @@
 	)
 	(global_label "FORCE-"
 		(shape input)
-		(at 218.44 139.7 0)
+		(at 214.63 143.51 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -20433,7 +20433,7 @@
 		)
 		(uuid "ba47f33a-5780-4bfe-a05c-43b45b090b09")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 229.1057 139.7 0)
+			(at 225.2957 143.51 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -20445,7 +20445,7 @@
 	)
 	(global_label "3{slash}SCL1"
 		(shape input)
-		(at 261.62 110.49 0)
+		(at 257.81 114.3 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -20455,7 +20455,7 @@
 		)
 		(uuid "bbafad3c-71dd-416f-aec7-a9b8a1176c16")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 271.8623 110.49 0)
+			(at 268.0523 114.3 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -20512,7 +20512,7 @@
 	)
 	(global_label "VDDIO_EXT"
 		(shape input)
-		(at 218.44 115.57 0)
+		(at 214.63 119.38 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -20522,7 +20522,7 @@
 		)
 		(uuid "c050e2a2-5a4d-48c2-9249-672015b797ca")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 231.2828 115.57 0)
+			(at 227.4728 119.38 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -20556,7 +20556,7 @@
 	)
 	(global_label "4{slash}SDA1"
 		(shape input)
-		(at 261.62 115.57 0)
+		(at 257.81 119.38 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -20566,7 +20566,7 @@
 		)
 		(uuid "c83b26fc-e286-412e-b5b0-3df33c583bb7")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 271.9228 115.57 0)
+			(at 268.1128 119.38 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -20623,7 +20623,7 @@
 	)
 	(global_label "1{slash}LPIO2{slash}RX"
 		(shape input)
-		(at 261.62 100.33 0)
+		(at 257.81 104.14 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -20633,7 +20633,7 @@
 		)
 		(uuid "d7187bc2-af62-443a-99f3-073805d3eb0b")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 276.3981 100.33 0)
+			(at 272.5881 104.14 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -20645,7 +20645,7 @@
 	)
 	(global_label "11{slash}A1"
 		(shape input)
-		(at 218.44 100.33 0)
+		(at 214.63 104.14 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -20655,7 +20655,7 @@
 		)
 		(uuid "dbe626fb-7250-45c2-8921-fcfd9788b40a")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 227.4728 100.33 0)
+			(at 223.6628 104.14 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -20689,7 +20689,7 @@
 	)
 	(global_label "VIN"
 		(shape input)
-		(at 218.44 120.65 0)
+		(at 214.63 124.46 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -20699,7 +20699,7 @@
 		)
 		(uuid "e4dc05d3-9a8a-4a52-be1f-174ea5bf29a0")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 224.4491 120.65 0)
+			(at 220.6391 124.46 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -20889,7 +20889,7 @@
 	)
 	(symbol
 		(lib_id "power:PWR_FLAG")
-		(at 261.62 95.25 90)
+		(at 257.81 99.06 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -20898,7 +20898,7 @@
 		(fields_autoplaced yes)
 		(uuid "1958b88e-dab9-442e-b8ad-7e36bf707efe")
 		(property "Reference" "#FLG01"
-			(at 259.715 95.25 0)
+			(at 255.905 99.06 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -20907,7 +20907,7 @@
 			)
 		)
 		(property "Value" "PWR_FLAG"
-			(at 257.81 95.2499 90)
+			(at 254 99.0599 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -20916,7 +20916,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 261.62 95.25 0)
+			(at 257.81 99.06 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -20925,7 +20925,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 261.62 95.25 0)
+			(at 257.81 99.06 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -20934,7 +20934,7 @@
 			)
 		)
 		(property "Description" "Special symbol for telling ERC where power comes from"
-			(at 261.62 95.25 0)
+			(at 257.81 99.06 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -21100,7 +21100,7 @@
 	)
 	(symbol
 		(lib_id "power:PWR_FLAG")
-		(at 218.44 134.62 90)
+		(at 214.63 138.43 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -21109,7 +21109,7 @@
 		(fields_autoplaced yes)
 		(uuid "2435a9fb-063d-4087-89ad-9c51155f88c0")
 		(property "Reference" "#FLG011"
-			(at 216.535 134.62 0)
+			(at 212.725 138.43 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -21118,7 +21118,7 @@
 			)
 		)
 		(property "Value" "PWR_FLAG"
-			(at 214.63 134.6199 90)
+			(at 210.82 138.4299 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -21127,7 +21127,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 218.44 134.62 0)
+			(at 214.63 138.43 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -21136,7 +21136,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 218.44 134.62 0)
+			(at 214.63 138.43 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -21145,7 +21145,7 @@
 			)
 		)
 		(property "Description" "Special symbol for telling ERC where power comes from"
-			(at 218.44 134.62 0)
+			(at 214.63 138.43 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -21472,7 +21472,7 @@
 	)
 	(symbol
 		(lib_id "power:PWR_FLAG")
-		(at 218.44 120.65 90)
+		(at 214.63 124.46 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -21481,7 +21481,7 @@
 		(fields_autoplaced yes)
 		(uuid "29e58f94-de46-4b57-b985-eeb5591ffaee")
 		(property "Reference" "#FLG016"
-			(at 216.535 120.65 0)
+			(at 212.725 124.46 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -21490,7 +21490,7 @@
 			)
 		)
 		(property "Value" "PWR_FLAG"
-			(at 214.63 120.6499 90)
+			(at 210.82 124.4599 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -21499,7 +21499,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 218.44 120.65 0)
+			(at 214.63 124.46 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -21508,7 +21508,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 218.44 120.65 0)
+			(at 214.63 124.46 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -21517,7 +21517,7 @@
 			)
 		)
 		(property "Description" "Special symbol for telling ERC where power comes from"
-			(at 218.44 120.65 0)
+			(at 214.63 124.46 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -21607,7 +21607,7 @@
 	)
 	(symbol
 		(lib_id "power:PWR_FLAG")
-		(at 218.44 95.25 90)
+		(at 214.63 99.06 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -21616,7 +21616,7 @@
 		(fields_autoplaced yes)
 		(uuid "3834bc17-3a35-43f3-9e19-71c7b7140140")
 		(property "Reference" "#FLG02"
-			(at 216.535 95.25 0)
+			(at 212.725 99.06 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -21625,7 +21625,7 @@
 			)
 		)
 		(property "Value" "PWR_FLAG"
-			(at 214.63 95.2499 90)
+			(at 210.82 99.0599 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -21634,7 +21634,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 218.44 95.25 0)
+			(at 214.63 99.06 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -21643,7 +21643,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 218.44 95.25 0)
+			(at 214.63 99.06 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -21652,7 +21652,7 @@
 			)
 		)
 		(property "Description" "Special symbol for telling ERC where power comes from"
-			(at 218.44 95.25 0)
+			(at 214.63 99.06 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -21809,7 +21809,7 @@
 	)
 	(symbol
 		(lib_id "power:PWR_FLAG")
-		(at 261.62 125.73 90)
+		(at 257.81 129.54 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -21818,7 +21818,7 @@
 		(fields_autoplaced yes)
 		(uuid "45d7f387-88a5-4994-97d5-8af35c3dda7d")
 		(property "Reference" "#FLG010"
-			(at 259.715 125.73 0)
+			(at 255.905 129.54 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -21827,7 +21827,7 @@
 			)
 		)
 		(property "Value" "PWR_FLAG"
-			(at 257.81 125.7299 90)
+			(at 254 129.5399 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -21836,7 +21836,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 261.62 125.73 0)
+			(at 257.81 129.54 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -21845,7 +21845,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 261.62 125.73 0)
+			(at 257.81 129.54 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -21854,7 +21854,7 @@
 			)
 		)
 		(property "Description" "Special symbol for telling ERC where power comes from"
-			(at 261.62 125.73 0)
+			(at 257.81 129.54 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -22513,7 +22513,7 @@
 	)
 	(symbol
 		(lib_id "power:PWR_FLAG")
-		(at 261.62 115.57 90)
+		(at 257.81 119.38 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -22522,7 +22522,7 @@
 		(fields_autoplaced yes)
 		(uuid "5e831e6d-23bd-40de-9f40-0c023d39684f")
 		(property "Reference" "#FLG08"
-			(at 259.715 115.57 0)
+			(at 255.905 119.38 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -22531,7 +22531,7 @@
 			)
 		)
 		(property "Value" "PWR_FLAG"
-			(at 257.81 115.5699 90)
+			(at 254 119.3799 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -22540,7 +22540,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 261.62 115.57 0)
+			(at 257.81 119.38 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -22549,7 +22549,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 261.62 115.57 0)
+			(at 257.81 119.38 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -22558,7 +22558,7 @@
 			)
 		)
 		(property "Description" "Special symbol for telling ERC where power comes from"
-			(at 261.62 115.57 0)
+			(at 257.81 119.38 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -22648,7 +22648,7 @@
 	)
 	(symbol
 		(lib_id "power:PWR_FLAG")
-		(at 261.62 120.65 90)
+		(at 257.81 124.46 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -22657,7 +22657,7 @@
 		(fields_autoplaced yes)
 		(uuid "66ff0cde-39da-433e-9d1e-4722e4c55f94")
 		(property "Reference" "#FLG09"
-			(at 259.715 120.65 0)
+			(at 255.905 124.46 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -22666,7 +22666,7 @@
 			)
 		)
 		(property "Value" "PWR_FLAG"
-			(at 257.81 120.6499 90)
+			(at 254 124.4599 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -22675,7 +22675,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 261.62 120.65 0)
+			(at 257.81 124.46 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -22684,7 +22684,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 261.62 120.65 0)
+			(at 257.81 124.46 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -22693,7 +22693,7 @@
 			)
 		)
 		(property "Description" "Special symbol for telling ERC where power comes from"
-			(at 261.62 120.65 0)
+			(at 257.81 124.46 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -22715,7 +22715,7 @@
 	)
 	(symbol
 		(lib_id "power:PWR_FLAG")
-		(at 218.44 110.49 90)
+		(at 214.63 114.3 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -22724,7 +22724,7 @@
 		(fields_autoplaced yes)
 		(uuid "68db8d89-698f-4b28-8cc1-73e16d6dbe68")
 		(property "Reference" "#FLG014"
-			(at 216.535 110.49 0)
+			(at 212.725 114.3 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -22733,7 +22733,7 @@
 			)
 		)
 		(property "Value" "PWR_FLAG"
-			(at 214.63 110.4899 90)
+			(at 210.82 114.2999 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -22742,7 +22742,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 218.44 110.49 0)
+			(at 214.63 114.3 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -22751,7 +22751,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 218.44 110.49 0)
+			(at 214.63 114.3 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -22760,7 +22760,7 @@
 			)
 		)
 		(property "Description" "Special symbol for telling ERC where power comes from"
-			(at 218.44 110.49 0)
+			(at 214.63 114.3 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -22834,10 +22834,10 @@
 			)
 		)
 		(pin "1"
-			(uuid "ced7d033-40fa-4902-938f-c6ad5ffc5616")
+			(uuid "ced7d033-40fa-4902-938f-c6ad5ffc5617")
 		)
 		(pin "2"
-			(uuid "c8ed905d-1265-40d3-bc31-61048e9e8af9")
+			(uuid "c8ed905d-1265-40d3-bc31-61048e9e8afa")
 		)
 		(instances
 			(project ""
@@ -22920,7 +22920,7 @@
 	)
 	(symbol
 		(lib_id "power:PWR_FLAG")
-		(at 261.62 110.49 90)
+		(at 257.81 114.3 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -22929,7 +22929,7 @@
 		(fields_autoplaced yes)
 		(uuid "6afff181-68cb-4307-b07c-5b208bd07342")
 		(property "Reference" "#FLG07"
-			(at 259.715 110.49 0)
+			(at 255.905 114.3 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -22938,7 +22938,7 @@
 			)
 		)
 		(property "Value" "PWR_FLAG"
-			(at 257.81 110.4899 90)
+			(at 254 114.2999 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -22947,7 +22947,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 261.62 110.49 0)
+			(at 257.81 114.3 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -22956,7 +22956,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 261.62 110.49 0)
+			(at 257.81 114.3 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -22965,7 +22965,7 @@
 			)
 		)
 		(property "Description" "Special symbol for telling ERC where power comes from"
-			(at 261.62 110.49 0)
+			(at 257.81 114.3 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -22987,7 +22987,7 @@
 	)
 	(symbol
 		(lib_id "power:PWR_FLAG")
-		(at 218.44 100.33 90)
+		(at 214.63 104.14 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -22996,7 +22996,7 @@
 		(fields_autoplaced yes)
 		(uuid "707a8c99-e801-4eb5-8f73-e927bdf292f1")
 		(property "Reference" "#FLG03"
-			(at 216.535 100.33 0)
+			(at 212.725 104.14 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -23005,7 +23005,7 @@
 			)
 		)
 		(property "Value" "PWR_FLAG"
-			(at 214.63 100.3299 90)
+			(at 210.82 104.1399 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -23014,7 +23014,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 218.44 100.33 0)
+			(at 214.63 104.14 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -23023,7 +23023,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 218.44 100.33 0)
+			(at 214.63 104.14 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -23032,7 +23032,7 @@
 			)
 		)
 		(property "Description" "Special symbol for telling ERC where power comes from"
-			(at 218.44 100.33 0)
+			(at 214.63 104.14 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -23054,7 +23054,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 218.44 125.73 90)
+		(at 214.63 129.54 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -23063,7 +23063,7 @@
 		(fields_autoplaced yes)
 		(uuid "78dbf32f-fa65-41fd-9127-1a4e4ac804ae")
 		(property "Reference" "#PWR04"
-			(at 224.79 125.73 0)
+			(at 220.98 129.54 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -23072,7 +23072,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 222.25 125.7299 90)
+			(at 218.44 129.5399 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -23081,7 +23081,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 218.44 125.73 0)
+			(at 214.63 129.54 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -23090,7 +23090,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 218.44 125.73 0)
+			(at 214.63 129.54 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -23099,7 +23099,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 218.44 125.73 0)
+			(at 214.63 129.54 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -23276,7 +23276,7 @@
 	)
 	(symbol
 		(lib_id "power:PWR_FLAG")
-		(at 261.62 130.81 90)
+		(at 257.81 134.62 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -23285,7 +23285,7 @@
 		(fields_autoplaced yes)
 		(uuid "8355b69c-c7ba-4e9a-8334-f86399b1e1af")
 		(property "Reference" "#FLG013"
-			(at 259.715 130.81 0)
+			(at 255.905 134.62 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -23294,7 +23294,7 @@
 			)
 		)
 		(property "Value" "PWR_FLAG"
-			(at 257.81 130.8099 90)
+			(at 254 134.6199 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -23303,7 +23303,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 261.62 130.81 0)
+			(at 257.81 134.62 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -23312,7 +23312,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 261.62 130.81 0)
+			(at 257.81 134.62 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -23321,7 +23321,7 @@
 			)
 		)
 		(property "Description" "Special symbol for telling ERC where power comes from"
-			(at 261.62 130.81 0)
+			(at 257.81 134.62 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -23511,7 +23511,7 @@
 	)
 	(symbol
 		(lib_id "power:PWR_FLAG")
-		(at 218.44 125.73 90)
+		(at 214.63 129.54 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -23520,7 +23520,7 @@
 		(fields_autoplaced yes)
 		(uuid "9446911e-b5d7-4e11-af29-93d27577888c")
 		(property "Reference" "#FLG04"
-			(at 216.535 125.73 0)
+			(at 212.725 129.54 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -23529,7 +23529,7 @@
 			)
 		)
 		(property "Value" "PWR_FLAG"
-			(at 214.63 125.7299 90)
+			(at 210.82 129.5399 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -23538,7 +23538,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 218.44 125.73 0)
+			(at 214.63 129.54 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -23547,7 +23547,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 218.44 125.73 0)
+			(at 214.63 129.54 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -23556,7 +23556,7 @@
 			)
 		)
 		(property "Description" "Special symbol for telling ERC where power comes from"
-			(at 218.44 125.73 0)
+			(at 214.63 129.54 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -23632,10 +23632,10 @@
 			)
 		)
 		(pin "1"
-			(uuid "603d576a-befd-43de-a1f5-aad43b9270f3")
+			(uuid "603d576a-befd-43de-a1f5-aad43b9270f4")
 		)
 		(pin "2"
-			(uuid "26124776-57fe-4e10-b721-87668704aaf7")
+			(uuid "26124776-57fe-4e10-b721-87668704aaf8")
 		)
 		(instances
 			(project ""
@@ -23786,7 +23786,7 @@
 	)
 	(symbol
 		(lib_id "power:PWR_FLAG")
-		(at 218.44 115.57 90)
+		(at 214.63 119.38 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -23795,7 +23795,7 @@
 		(fields_autoplaced yes)
 		(uuid "a343fafd-c150-4fa2-a4e8-4866a601b750")
 		(property "Reference" "#FLG015"
-			(at 216.535 115.57 0)
+			(at 212.725 119.38 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -23804,7 +23804,7 @@
 			)
 		)
 		(property "Value" "PWR_FLAG"
-			(at 214.63 115.5699 90)
+			(at 210.82 119.3799 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -23813,7 +23813,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 218.44 115.57 0)
+			(at 214.63 119.38 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -23822,7 +23822,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 218.44 115.57 0)
+			(at 214.63 119.38 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -23831,7 +23831,7 @@
 			)
 		)
 		(property "Description" "Special symbol for telling ERC where power comes from"
-			(at 218.44 115.57 0)
+			(at 214.63 119.38 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -23921,7 +23921,7 @@
 	)
 	(symbol
 		(lib_id "power:PWR_FLAG")
-		(at 261.62 100.33 90)
+		(at 257.81 104.14 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -23930,7 +23930,7 @@
 		(fields_autoplaced yes)
 		(uuid "a9621ec9-4244-481c-8bbd-df2a5bdfe805")
 		(property "Reference" "#FLG05"
-			(at 259.715 100.33 0)
+			(at 255.905 104.14 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -23939,7 +23939,7 @@
 			)
 		)
 		(property "Value" "PWR_FLAG"
-			(at 257.81 100.3299 90)
+			(at 254 104.1399 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -23948,7 +23948,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 261.62 100.33 0)
+			(at 257.81 104.14 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -23957,7 +23957,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 261.62 100.33 0)
+			(at 257.81 104.14 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -23966,7 +23966,7 @@
 			)
 		)
 		(property "Description" "Special symbol for telling ERC where power comes from"
-			(at 261.62 100.33 0)
+			(at 257.81 104.14 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -24264,7 +24264,7 @@
 	)
 	(symbol
 		(lib_id "power:PWR_FLAG")
-		(at 218.44 139.7 90)
+		(at 214.63 143.51 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -24273,7 +24273,7 @@
 		(fields_autoplaced yes)
 		(uuid "cb7da742-677d-4fab-9fca-e01dc97dfda3")
 		(property "Reference" "#FLG012"
-			(at 216.535 139.7 0)
+			(at 212.725 143.51 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -24282,7 +24282,7 @@
 			)
 		)
 		(property "Value" "PWR_FLAG"
-			(at 214.63 139.6999 90)
+			(at 210.82 143.5099 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -24291,7 +24291,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 218.44 139.7 0)
+			(at 214.63 143.51 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -24300,7 +24300,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 218.44 139.7 0)
+			(at 214.63 143.51 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -24309,7 +24309,7 @@
 			)
 		)
 		(property "Description" "Special symbol for telling ERC where power comes from"
-			(at 218.44 139.7 0)
+			(at 214.63 143.51 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -24523,10 +24523,10 @@
 			)
 		)
 		(pin "2"
-			(uuid "f3bd54c4-d51b-4cad-9eb3-84cf71e4c4dd")
+			(uuid "f3bd54c4-d51b-4cad-9eb3-84cf71e4c4de")
 		)
 		(pin "1"
-			(uuid "e96136f6-d65a-4129-99ed-1f2c2bcc3d6e")
+			(uuid "e96136f6-d65a-4129-99ed-1f2c2bcc3d6f")
 		)
 		(instances
 			(project ""
@@ -24605,7 +24605,7 @@
 	)
 	(symbol
 		(lib_id "power:PWR_FLAG")
-		(at 261.62 105.41 90)
+		(at 257.81 109.22 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -24614,7 +24614,7 @@
 		(fields_autoplaced yes)
 		(uuid "fc4faeb2-c377-4d00-9186-ae9d03824446")
 		(property "Reference" "#FLG06"
-			(at 259.715 105.41 0)
+			(at 255.905 109.22 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -24623,7 +24623,7 @@
 			)
 		)
 		(property "Value" "PWR_FLAG"
-			(at 257.81 105.4099 90)
+			(at 254 109.2199 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -24632,7 +24632,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 261.62 105.41 0)
+			(at 257.81 109.22 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -24641,7 +24641,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 261.62 105.41 0)
+			(at 257.81 109.22 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -24650,7 +24650,7 @@
 			)
 		)
 		(property "Description" "Special symbol for telling ERC where power comes from"
-			(at 261.62 105.41 0)
+			(at 257.81 109.22 0)
 			(effects
 				(font
 					(size 1.27 1.27)

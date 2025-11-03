@@ -103,5 +103,5 @@ textbox.on_submit(textbox_update)
 
 # Initialize
 update_plot(t_max)
-plt.suptitle("Nicla Sense ME Data Viewer (Advanced)", color="white", fontsize=14)
+plt.suptitle("Nicla Sense ME Data Viewer", color="white", fontsize=14)
 plt.show()
