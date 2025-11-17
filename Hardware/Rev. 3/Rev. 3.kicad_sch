@@ -18439,6 +18439,28 @@
 			)
 		)
 	)
+	(global_label "DIODE"
+		(shape input)
+		(at 97.79 53.34 90)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "6f4d4cb3-4ae0-4430-b655-3beb9374df8a")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 97.79 44.7305 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
 	(global_label "5{slash}LPIO0"
 		(shape input)
 		(at 144.78 54.61 180)
