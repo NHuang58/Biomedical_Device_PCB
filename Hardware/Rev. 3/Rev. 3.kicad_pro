@@ -518,7 +518,7 @@
       "idf": "",
       "netlist": "",
       "plot": "../../../../../Downloads/Rev.1_gerbers/",
-      "pos_files": "",
+      "pos_files": "./",
       "specctra_dsn": "",
       "step": "",
       "svg": "",
