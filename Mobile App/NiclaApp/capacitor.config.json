@@ -1,0 +1,6 @@
+{
+  "appId": "com.nathan.niclaapp",
+  "appName": "NiclaApp",
+  "webDir": "www",
+  "bundledWebRuntime": false
+}
