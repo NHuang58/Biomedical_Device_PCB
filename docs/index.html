@@ -444,47 +444,38 @@
     pairButton.innerHTML = "PAIRING";
     msg('requesting device ...');
 
-    // SAFARI-FRIENDLY: no filters allowed
     const device = await navigator.bluetooth.requestDevice({
       acceptAllDevices: true,
       optionalServices: [SERVICE_UUID]
     });
+    
 
     msg('connecting to device ...');
-
-    device.addEventListener('gattserverdisconnected', e =>
-      setTimeout(() => onDisconnected(e), 200) // iOS needs delay
-    );
-
+    device.addEventListener('gattserverdisconnected', onDisconnected);
     const server = await device.gatt.connect();
 
     msg('getting primary service ...');
     const service = await server.getPrimaryService(SERVICE_UUID);
 
-    // Set up characteristics
+    // Set up the characteristics
     for (const sensor of sensors) {
       msg('characteristic ' + sensor + "...");
-      NiclaSenseME[sensor].characteristic =
-        await service.getCharacteristic(NiclaSenseME[sensor].uuid);
-
+      NiclaSenseME[sensor].characteristic = await service.getCharacteristic(NiclaSenseME[sensor].uuid);
+      // Set up notification
       if (NiclaSenseME[sensor].properties.includes("BLENotify")) {
-        NiclaSenseME[sensor].characteristic.addEventListener(
-          'characteristicvaluechanged',
-          e => handleIncoming(NiclaSenseME[sensor], e.target.value)
-        );
+        NiclaSenseME[sensor].characteristic.addEventListener('characteristicvaluechanged', function (event) { handleIncoming(NiclaSenseME[sensor], event.target.value); });
         await NiclaSenseME[sensor].characteristic.startNotifications();
       }
-
+      // Set up polling for read
       if (NiclaSenseME[sensor].properties.includes("BLERead")) {
-        NiclaSenseME[sensor].polling = setInterval(() => {
-          NiclaSenseME[sensor].characteristic.readValue()
-            .then(data => handleIncoming(NiclaSenseME[sensor], data));
-        }, 500);
+        NiclaSenseME[sensor].polling = setInterval(function () {
+          NiclaSenseME[sensor].characteristic.readValue().then(function (data) { handleIncoming(NiclaSenseME[sensor], data); })
+        }
+          , 500);
       }
 
       NiclaSenseME[sensor].rendered = false;
     }
-
     pairButton.style.backgroundColor = 'green';
     pairButton.style.color = 'white';
     pairButton.innerHTML = "PAIRED";
@@ -493,7 +484,6 @@
 
     initColorPicker();
   }
-
 
   function handleIncoming(sensor, dataReceived) {
     const columns = Object.keys(sensor.data); // column headings for this sensor
@@ -631,14 +621,8 @@
 
   // 3d model
   // var renderer = new THREE.WebGLRenderer();
-
-  // Safari renderer below
-
-  var renderer = new THREE.WebGLRenderer({
-    antialias: true,
-    preserveDrawingBuffer: true
-  });
-
+  // Safari renderer
+  var renderer = new THREE.WebGLRenderer({ antialias: true, preserveDrawingBuffer: true });
 
   var scene = new THREE.Scene();
   var camera = new THREE.PerspectiveCamera(75, 1, 1, 10000);
