@@ -2,13 +2,17 @@
 <html>
 
 <head>
-  <title>Arduino Nicla Sense ME - Web BLE test</title>
+  <title>Arduino Nicla Sense ME - Web Data Logger</title>
 
   <link href='https://fonts.googleapis.com/css?family=Roboto Mono' rel='stylesheet'>
   <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@jaames/iro/dist/iro.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/109/three.min.js"></script>
-  <script src="GLTFLoader.js"></script>
+  <!-- <script src="GLTFLoader.js"></script> -->
+  
+  <!-- For Safari Implementation-->
+  <script src="https://cdn.jsdelivr.net/npm/three@0.109/examples/js/loaders/GLTFLoader.js"></script>
+
   <style>
     * {
       font-family: 'Roboto Mono', sans-serif;
@@ -440,40 +444,47 @@
     pairButton.innerHTML = "PAIRING";
     msg('requesting device ...');
 
+    // SAFARI-FRIENDLY: no filters allowed
     const device = await navigator.bluetooth.requestDevice({
-      filters: [
-        {
-          services: [SERVICE_UUID] // SERVICE_UUID
-        }
-      ]
+      acceptAllDevices: true,
+      optionalServices: [SERVICE_UUID]
     });
 
     msg('connecting to device ...');
-    device.addEventListener('gattserverdisconnected', onDisconnected);
+
+    device.addEventListener('gattserverdisconnected', e =>
+      setTimeout(() => onDisconnected(e), 200) // iOS needs delay
+    );
+
     const server = await device.gatt.connect();
 
     msg('getting primary service ...');
     const service = await server.getPrimaryService(SERVICE_UUID);
 
-    // Set up the characteristics
+    // Set up characteristics
     for (const sensor of sensors) {
       msg('characteristic ' + sensor + "...");
-      NiclaSenseME[sensor].characteristic = await service.getCharacteristic(NiclaSenseME[sensor].uuid);
-      // Set up notification
+      NiclaSenseME[sensor].characteristic =
+        await service.getCharacteristic(NiclaSenseME[sensor].uuid);
+
       if (NiclaSenseME[sensor].properties.includes("BLENotify")) {
-        NiclaSenseME[sensor].characteristic.addEventListener('characteristicvaluechanged', function (event) { handleIncoming(NiclaSenseME[sensor], event.target.value); });
+        NiclaSenseME[sensor].characteristic.addEventListener(
+          'characteristicvaluechanged',
+          e => handleIncoming(NiclaSenseME[sensor], e.target.value)
+        );
         await NiclaSenseME[sensor].characteristic.startNotifications();
       }
-      // Set up polling for read
+
       if (NiclaSenseME[sensor].properties.includes("BLERead")) {
-        NiclaSenseME[sensor].polling = setInterval(function () {
-          NiclaSenseME[sensor].characteristic.readValue().then(function (data) { handleIncoming(NiclaSenseME[sensor], data); })
-        }
-          , 500);
+        NiclaSenseME[sensor].polling = setInterval(() => {
+          NiclaSenseME[sensor].characteristic.readValue()
+            .then(data => handleIncoming(NiclaSenseME[sensor], data));
+        }, 500);
       }
 
       NiclaSenseME[sensor].rendered = false;
     }
+
     pairButton.style.backgroundColor = 'green';
     pairButton.style.color = 'white';
     pairButton.innerHTML = "PAIRED";
@@ -482,6 +493,7 @@
 
     initColorPicker();
   }
+
 
   function handleIncoming(sensor, dataReceived) {
     const columns = Object.keys(sensor.data); // column headings for this sensor
@@ -618,7 +630,16 @@
   }
 
   // 3d model
-  var renderer = new THREE.WebGLRenderer();
+  // var renderer = new THREE.WebGLRenderer();
+
+  // Safari renderer below
+
+  var renderer = new THREE.WebGLRenderer({
+    antialias: true,
+    preserveDrawingBuffer: true
+  });
+
+
   var scene = new THREE.Scene();
   var camera = new THREE.PerspectiveCamera(75, 1, 1, 10000);
 
