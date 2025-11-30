@@ -2,16 +2,19 @@
 <html>
 
 <head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
   <title>Arduino Nicla Sense ME - Web Data Logger</title>
 
-  <link href='https://fonts.googleapis.com/css?family=Roboto Mono' rel='stylesheet'>
+  <link href='https://fonts.googleapis.com/css?family=Roboto+Mono' rel='stylesheet'>
   <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@jaames/iro/dist/iro.min.js"></script>
+
+  <!-- Three.js must be loaded BEFORE the local GLTFLoader.js -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/109/three.min.js"></script>
-  <!-- <script src="GLTFLoader.js"></script> -->
-  
-  <!-- For Safari Implementation-->
-  <script src="https://cdn.jsdelivr.net/npm/three@0.109/examples/js/loaders/GLTFLoader.js"></script>
+  <!-- Local loader (you said this file is in same directory) -->
+  <script src="GLTFLoader.js"></script>
 
   <style>
     * {
@@ -400,21 +403,8 @@
   var bytesReceived = 0;
   var bytesPrevious = 0;
 
-  // UI elements
-  const pairButton = document.getElementById('pairButton');
-  const BLEstatus = document.getElementById('bluetooth');
-
-  snack('IMPORTANT - first upload the sketch to your Arduino Nicla Sense ME &nbsp;&nbsp; <a href="https://create.arduino.cc/editor/FT-CONTENT/333e2e07-ecc4-414c-bf08-005b611ddd75/preview">OPEN</a>', 1)
-  
-  if ("bluetooth" in navigator) {
-    pairButton.addEventListener('click', function (event) {
-      connect();
-    });
-    // else the browser doesn't support bluetooth
-  } else {
-    msg("browser not supported"); /*pairButton.style.backgroundColor = "red";*/
-    snack("Error: This browser doesn't support Web Bluetooth. Try using Chrome.", 1);
-  }
+  // We'll assign UI elements on DOMContentLoaded to ensure they exist
+  var pairButton, BLEstatus, snackBar;
 
   // Top middle information label
   function msg(m) {
@@ -423,7 +413,6 @@
 
   //Top left pop up messaage
   function snack(m, warningLevel) {
-    snackBar = document.getElementById("snackbar");
     snackBar.style.visibility = "visible";
     snackBar.className = "show";
 
@@ -434,7 +423,6 @@
   }
 
   function hideSnack() {
-    snackBar = document.getElementById("snackbar");
     snackBar.style.visibility = "hidden";
   }
 
@@ -444,45 +432,54 @@
     pairButton.innerHTML = "PAIRING";
     msg('requesting device ...');
 
-    const device = await navigator.bluetooth.requestDevice({
-      acceptAllDevices: true,
-      optionalServices: [SERVICE_UUID]
-    });
-    
+    try {
+      const device = await navigator.bluetooth.requestDevice({
+        // Accept all devices but request the service so we can access characteristics
+        acceptAllDevices: true,
+        optionalServices: [SERVICE_UUID]
+      });
 
-    msg('connecting to device ...');
-    device.addEventListener('gattserverdisconnected', onDisconnected);
-    const server = await device.gatt.connect();
+      msg('connecting to device ...');
+      device.addEventListener('gattserverdisconnected', onDisconnected);
+      const server = await device.gatt.connect();
 
-    msg('getting primary service ...');
-    const service = await server.getPrimaryService(SERVICE_UUID);
+      msg('getting primary service ...');
+      const service = await server.getPrimaryService(SERVICE_UUID);
 
-    // Set up the characteristics
-    for (const sensor of sensors) {
-      msg('characteristic ' + sensor + "...");
-      NiclaSenseME[sensor].characteristic = await service.getCharacteristic(NiclaSenseME[sensor].uuid);
-      // Set up notification
-      if (NiclaSenseME[sensor].properties.includes("BLENotify")) {
-        NiclaSenseME[sensor].characteristic.addEventListener('characteristicvaluechanged', function (event) { handleIncoming(NiclaSenseME[sensor], event.target.value); });
-        await NiclaSenseME[sensor].characteristic.startNotifications();
-      }
-      // Set up polling for read
-      if (NiclaSenseME[sensor].properties.includes("BLERead")) {
-        NiclaSenseME[sensor].polling = setInterval(function () {
-          NiclaSenseME[sensor].characteristic.readValue().then(function (data) { handleIncoming(NiclaSenseME[sensor], data); })
+      // Set up the characteristics
+      for (const sensor of sensors) {
+        msg('characteristic ' + sensor + "...");
+        NiclaSenseME[sensor].characteristic = await service.getCharacteristic(NiclaSenseME[sensor].uuid);
+        // Set up notification
+        if (NiclaSenseME[sensor].properties.includes("BLENotify")) {
+          NiclaSenseME[sensor].characteristic.addEventListener('characteristicvaluechanged', function (event) { handleIncoming(NiclaSenseME[sensor], event.target.value); });
+          await NiclaSenseME[sensor].characteristic.startNotifications();
         }
-          , 500);
+        // Set up polling for read
+        if (NiclaSenseME[sensor].properties.includes("BLERead")) {
+          NiclaSenseME[sensor].polling = setInterval(function () {
+            NiclaSenseME[sensor].characteristic.readValue().then(function (data) { handleIncoming(NiclaSenseME[sensor], data); })
+          }
+            , 500);
+        }
+
+        NiclaSenseME[sensor].rendered = false;
       }
+      pairButton.style.backgroundColor = 'green';
+      pairButton.style.color = 'white';
+      pairButton.innerHTML = "PAIRED";
+      msg('Characteristics configured');
+      snack('Connected.', 0);
 
-      NiclaSenseME[sensor].rendered = false;
+      initColorPicker();
+    } catch (err) {
+      console.error('Connect error', err);
+      pairButton.style.backgroundColor = '#d8f41d';
+      pairButton.style.color = 'black';
+      pairButton.innerHTML = "CONNECT";
+      msg('Error during connection');
+      snack('Connection failed or cancelled', 1);
     }
-    pairButton.style.backgroundColor = 'green';
-    pairButton.style.color = 'white';
-    pairButton.innerHTML = "PAIRED";
-    msg('Characteristics configured');
-    snack('Connected.', 0);
-
-    initColorPicker();
   }
 
   function handleIncoming(sensor, dataReceived) {
@@ -527,18 +524,23 @@
     }
     // clear color picker write
     const colorPickerElement = document.getElementById("color-picker-container");
-    colorPickerElement.removeChild(colorPickerElement.firstChild);
+    if (colorPickerElement && colorPickerElement.firstChild) {
+      try { colorPickerElement.removeChild(colorPickerElement.firstChild); } catch (e) { /*ignore*/ }
+    }
 
-    snack('Device ' + device.name + ' has been disconnected.', 1);
+    snack('Device ' + (device && device.name ? device.name : '') + ' has been disconnected.', 1);
     msg("Disconnected");
 
-    // The board's LED will go red once it detects it has been disconnected
-    ledLight.color.setRGB(255,0,0);
-    ledMaterial.color.setRGB(255,0,0);
+    // The board's LED will go red once it detects it has been disconnected (guard in case no 3D model yet)
+    try {
+      if (ledLight && ledLight.color) ledLight.color.setRGB(255, 0, 0);
+      if (ledMaterial && ledMaterial.color) ledMaterial.color.setRGB(255, 0, 0);
+    } catch (e) { /*ignore if not initialized*/ }
   }
 
   function BLEwriteTo(sensor) {
     if (NiclaSenseME[sensor].writeBusy) return; // dropping writes when one is in progress instead of queuing as LED is non-critical / realtime
+    if (!NiclaSenseME[sensor].characteristic) return;
     NiclaSenseME[sensor].writeBusy = true; // Ensure no write happens when GATT operation in progress
     NiclaSenseME[sensor].characteristic.writeValue(NiclaSenseME[sensor].writeValue)
       .then(_ => {
@@ -546,20 +548,24 @@
       })
       .catch(error => {
         console.log(error);
+        NiclaSenseME[sensor].writeBusy = false;
       });
   }
 
-</script>
-
-<script>
+  // ------------------------
+  // Color picker + LED write
+  // ------------------------
+  var ledMaterial, ledObject, ledLight;
 
   function initColorPicker() {
     //Default color blue
     var rgb_values = Uint8Array.of(0, 0, 255);
     NiclaSenseME['led'].writeValue = rgb_values;
     BLEwriteTo('led');
-    ledMaterial.color.setRGB(0,0,255);
-    ledLight.color.setRGB(0,0,255);
+    try {
+      if (ledMaterial && ledMaterial.color) ledMaterial.color.setRGB(0, 0, 255);
+      if (ledLight && ledLight.color) ledLight.color.setRGB(0, 0, 255);
+    } catch (e) { /*ignore*/ }
 
     NiclaSenseME.led.colorPicker = new iro.ColorPicker("#color-picker-container", {
       width: 150,
@@ -572,14 +578,14 @@
     // RGB Color Picker
     NiclaSenseME.led.colorPicker.on('color:change', updateModelLed);
     function updateModelLed(color) {
-      ledLight.color.setHex("0x" + color.hexString.substring(1, 7));
-      ledMaterial.color.set(color.hexString)   // where r, g, and b are 0 to 1
+      try {
+        if (ledLight && ledLight.color) ledLight.color.setHex("0x" + color.hexString.substring(1, 7));
+        if (ledMaterial && ledMaterial.color) ledMaterial.color.set(color.hexString);   // where r, g, and b are 0 to 1
+      } catch (e) { /* ignore if 3D not loaded */ }
       var rgb_values = Uint8Array.of(color.rgb.r, color.rgb.g, color.rgb.b);
       NiclaSenseME['led'].writeValue = rgb_values;
       BLEwriteTo('led');
     }
-
-    
   }
 
   // Graphing
@@ -620,73 +626,85 @@
   }
 
   // 3d model
-  // var renderer = new THREE.WebGLRenderer();
-  // Safari renderer
+  // Use a renderer created with antialias + preserveDrawingBuffer for screenshots / export
   var renderer = new THREE.WebGLRenderer({ antialias: true, preserveDrawingBuffer: true });
-
   var scene = new THREE.Scene();
   var camera = new THREE.PerspectiveCamera(75, 1, 1, 10000);
+  var arduinoModel;
 
   function init3D() {
-    var container = document.getElementById('3d');
-    var loader = new THREE.GLTFLoader();
-    var canvasDigits = document.getElementById('canvasDigits');
-    scene.background = new THREE.Color(0x58585A);
-    renderer.setSize(177, 177);
+    try {
+      var container = document.getElementById('3d');
+      var loader = new THREE.GLTFLoader();
+      var canvasDigits = document.getElementById('canvasDigits');
+      scene.background = new THREE.Color(0x58585A);
 
-    renderer.setPixelRatio(4);
+      // set reasonable size
+      renderer.setSize(177, 177);
 
-    container.insertBefore(renderer.domElement, canvasDigits);
-    renderer.domElement.style.margin = "9px";
-    loader.load('models/niclaSenseME.glb',
-      // called when the Arduinio model is loaded
-      function (gltf) {
-        // Model
-        arduinoModel = gltf.scene;
-        scene.add(arduinoModel);
+      // Limit pixel ratio to avoid Safari crashes
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
 
-        // LED
-        var geometry = new THREE.BoxGeometry(1, 1, 1);
-        ledMaterial = new THREE.MeshBasicMaterial({ color: 0x111111 });
-        ledObject = new THREE.Mesh(geometry, ledMaterial);
-        ledObject.position.set(9, -10, -1);
-        
-        ledLight = new THREE.PointLight(0x111111, 3, 40);
-        ledLight.color.setRGB(0,255,0);
-        ledLight.position.set(9, -10, -1.2);
-        
-        ledMaterial.color.setRGB(0,255,0);
+      // Insert before the digits
+      container.insertBefore(renderer.domElement, canvasDigits);
+      renderer.domElement.style.margin = "9px";
+      loader.load('models/niclaSenseME.glb',
+        // called when the Arduino model is loaded
+        function (gltf) {
+          // Model
+          arduinoModel = gltf.scene;
+          scene.add(arduinoModel);
 
-        arduinoModel.add(ledObject);
-        arduinoModel.add(ledLight);
+          // LED
+          var geometry = new THREE.BoxGeometry(1, 1, 1);
+          ledMaterial = new THREE.MeshBasicMaterial({ color: 0x111111 });
+          ledObject = new THREE.Mesh(geometry, ledMaterial);
+          ledObject.position.set(9, -10, -1);
 
-        arduinoModel.rotation.x = 90 * (Math.PI/180);  // Show the bottom side of the board by default
-        
-        var sphereSize = 1;
+          ledLight = new THREE.PointLight(0x111111, 3, 40);
+          ledLight.color.setRGB(0, 255, 0);
+          ledLight.position.set(9, -10, -1.2);
 
-        // Light
-        const color = 0xFFFFFF;
-        const intensity = 1;
-        const light = new THREE.DirectionalLight(color, intensity);
-        light.position.set(-20, 100, -10);
-        light.target.position.set(0, 0, 0);
-        scene.add(light);
-        scene.add(light.target);
-        var hemiLight = new THREE.HemisphereLight(0xffffff, 0xffffff, 1);
-        scene.add(hemiLight);
+          ledMaterial.color.setRGB(0, 255, 0);
 
-        // Camera
-        camera.position.set(0, 25, 0);
-        camera.rotation.y = Math.PI; // 180
-        camera.lookAt(new THREE.Vector3(0, 0, 0));
-        renderer.render(scene, camera);
-      }
-    );
+          arduinoModel.add(ledObject);
+          arduinoModel.add(ledLight);
+
+          arduinoModel.rotation.x = 90 * (Math.PI / 180); // Show the bottom side of the board by default
+
+          var sphereSize = 1;
+
+          // Light
+          const color = 0xFFFFFF;
+          const intensity = 1;
+          const light = new THREE.DirectionalLight(color, intensity);
+          light.position.set(-20, 100, -10);
+          light.target.position.set(0, 0, 0);
+          scene.add(light);
+          scene.add(light.target);
+          var hemiLight = new THREE.HemisphereLight(0xffffff, 0xffffff, 1);
+          scene.add(hemiLight);
+
+          // Camera
+          camera.position.set(0, 25, 0);
+          camera.rotation.y = Math.PI; // 180
+          camera.lookAt(new THREE.Vector3(0, 0, 0));
+          renderer.render(scene, camera);
+        },
+        undefined,
+        function (error) {
+          console.error('Error loading GLTF:', error);
+        }
+      );
+    } catch (e) {
+      console.error('init3D error', e);
+    }
   }
 
   function colorBars(sensor) {
     // Color + light
     const canvas = document.getElementById('colors');
+    if (!canvas) return;
     const ctx = canvas.getContext('2d');
     const thickness = canvas.width / maxRecords;
     ctx.fillStyle = "#111111";
@@ -721,26 +739,28 @@
   }
 
   function update3d(sensor) {
-  
-    // Get the quaternion values
-    var x = NiclaSenseME['quaternion'].data.x.latest();
-    var y = NiclaSenseME['quaternion'].data.y.latest();
-    var z = NiclaSenseME['quaternion'].data.z.latest();
-    var w = NiclaSenseME['quaternion'].data.w.latest();
+
+    // Get the quaternion values (guard in case none received)
+    var x = NiclaSenseME['quaternion'].data.x.length ? NiclaSenseME['quaternion'].data.x.latest() : 0;
+    var y = NiclaSenseME['quaternion'].data.y.length ? NiclaSenseME['quaternion'].data.y.latest() : 0;
+    var z = NiclaSenseME['quaternion'].data.z.length ? NiclaSenseME['quaternion'].data.z.latest() : 0;
+    var w = NiclaSenseME['quaternion'].data.w.length ? NiclaSenseME['quaternion'].data.w.latest() : 1;
 
     // Construct the quaternion object with the values and apply that to the 3D model
-    const quaternion = new THREE.Quaternion(x, y, z, w);
-    quaternion.normalize();
-    arduinoModel.setRotationFromQuaternion(quaternion);
+    if (arduinoModel) {
+      const quaternion = new THREE.Quaternion(x, y, z, w);
+      quaternion.normalize();
+      arduinoModel.setRotationFromQuaternion(quaternion);
 
-    renderer.render(scene, camera);
+      renderer.render(scene, camera);
 
-    // Euler conversion, show the degrees below the 3D model
-    var rotation = new THREE.Euler().setFromQuaternion(quaternion, 'XYZ');
+      // Euler conversion, show the degrees below the 3D model
+      var rotation = new THREE.Euler().setFromQuaternion(quaternion, 'XYZ');
 
-    document.getElementById('xQuaternion').innerHTML = "x: " + Math.round(rotation.x * 180 / Math.PI + 180);
-    document.getElementById('yQuaternion').innerHTML = "y: " + Math.round(rotation.y * 180 / Math.PI + 180);
-    document.getElementById('zQuaternion').innerHTML = "z: " + Math.round(rotation.z * 180 / Math.PI + 180);
+      document.getElementById('xQuaternion').innerHTML = "x: " + Math.round(rotation.x * 180 / Math.PI + 180);
+      document.getElementById('yQuaternion').innerHTML = "y: " + Math.round(rotation.y * 180 / Math.PI + 180);
+      document.getElementById('zQuaternion').innerHTML = "z: " + Math.round(rotation.z * 180 / Math.PI + 180);
+    }
   }
 
   function bytes() {
@@ -851,40 +871,80 @@
   }
   
   // Popup UI and export trigger
-  document.getElementById('exportButton').addEventListener('click', async () => {
-    const secondsStr = prompt('Enter how much time of data to export (in seconds):', '60');
-    if (!secondsStr) return;
-    const secondsBack = parseFloat(secondsStr);
+  // export button handler will be attached on DOM ready
+  document.addEventListener('DOMContentLoaded', function () {
+    // Bind UI elements now that DOM is ready
+    pairButton = document.getElementById('pairButton');
+    BLEstatus = document.getElementById('bluetooth');
+    snackBar = document.getElementById('snackbar');
 
-    const sampleStr = prompt('Enter sampling interval (in milliseconds):', '500');
-    if (!sampleStr) return;
-    const sampleInterval = parseFloat(sampleStr);
+    // show the important sketch upload note
+    snack('IMPORTANT - first upload the sketch to your Arduino Nicla Sense ME &nbsp;&nbsp; <a href="https://create.arduino.cc/editor/FT-CONTENT/333e2e07-ecc4-414c-bf08-005b611ddd75/preview">OPEN</a>', 1);
 
-    if (isNaN(secondsBack) || isNaN(sampleInterval) || secondsBack <= 0 || sampleInterval <= 0) {
-      alert('Please enter valid positive numbers.');
-      return;
+    // iPad / iOS detection and instructions when Bluetooth API absent
+    function isIOS() {
+      return /iPad|iPhone|iPod/.test(navigator.userAgent) ||
+             (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
     }
 
-    const csvData = generateCSV(secondsBack, sampleInterval);
-    const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
-    const filename = `NiclaData.csv`;
-    downloadCSV(filename, csvData);
+    if (isIOS() && !navigator.bluetooth) {
+      // show a persistent hint to the user about limitations on iPad
+      snack(
+        "Web Bluetooth on iPad requires:<br>" +
+        "• iPadOS 16.4+<br>" +
+        "• Safari: Enable Develop → Experimental Features → Bluetooth<br>" +
+        "• OR install this site as a Web App (Share → Add to Home Screen)<br>" +
+        "• OR use Chrome 121+ on iPad",
+        1
+      );
+    }
 
-    snack(`Exported last ${secondsBack}s of data`, 0);
+    // Main capability check (more robust than 'bluetooth' in navigator)
+    if (navigator.bluetooth && typeof navigator.bluetooth.requestDevice === "function") {
+      pairButton.addEventListener('click', function (event) {
+        connect();
+      });
+    } else {
+      msg("browser not supported");
+      snack("Error: This browser doesn't support Web Bluetooth. Try using Chrome (desktop) or Safari with experimental features enabled on iPad.", 1);
+    }
+
+    // Export button
+    document.getElementById('exportButton').addEventListener('click', async () => {
+      const secondsStr = prompt('Enter how much time of data to export (in seconds):', '60');
+      if (!secondsStr) return;
+      const secondsBack = parseFloat(secondsStr);
+
+      const sampleStr = prompt('Enter sampling interval (in milliseconds):', '500');
+      if (!sampleStr) return;
+      const sampleInterval = parseFloat(sampleStr);
+
+      if (isNaN(secondsBack) || isNaN(sampleInterval) || secondsBack <= 0 || sampleInterval <= 0) {
+        alert('Please enter valid positive numbers.');
+        return;
+      }
+
+      const csvData = generateCSV(secondsBack, sampleInterval);
+      const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
+      const filename = `NiclaData.csv`;
+      downloadCSV(filename, csvData);
+
+      snack(`Exported last ${secondsBack}s of data`, 0);
+    });
+
+    // initialize graphs, 3D model, and start draw loop (same as original)
+    initGraph('gyroscope');
+    initGraph('accelerometer');
+    initGraph('temperature');
+    initGraph('humidity');
+    initGraph('pressure');
+    initGraph('bsec');
+    initGraph('co2');
+    initGraph('gas');
+
+    init3D();
+    requestAnimationFrame(draw);
   });
-
-
-  initGraph('gyroscope');
-  initGraph('accelerometer');
-  initGraph('temperature');
-  initGraph('humidity');
-  initGraph('pressure');
-  initGraph('bsec');
-  initGraph('co2');
-  initGraph('gas');
-
-  init3D();
-  requestAnimationFrame(draw);
 
 </script>
 
