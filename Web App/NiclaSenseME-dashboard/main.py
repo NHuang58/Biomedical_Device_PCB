@@ -19,6 +19,19 @@ def start_server():
         httpd.serve_forever()
 
 if __name__ == "__main__":
+    # Added Prompt
+    while True:
+        try:
+            minutes_to_save = int(input("Enter number of minutes to save: "))
+            if minutes_to_save > 0:
+                break
+            print("Please enter a positive number.")
+        except ValueError:
+            print("Please enter a valid number.")
+
+    print(f"Minutes to save: {minutes_to_save}")
+    # End Prompt
+
     server_thread = threading.Thread(target=start_server, daemon=True)
     server_thread.start()
 

@@ -77,6 +77,14 @@ void setup(){
   bsec.begin();
   gas.begin();
 
+  // Changing Sampling Rate to Fixed Number
+  // =====================
+  gyroscope.setRate(200);
+  accelerometer.setRate(200);
+  quaternion.setRate(200);
+  // Modify Above Lines
+  // =====================
+
   if (!BLE.begin()){
     Serial.println("Failed to initialized BLE!");
 
