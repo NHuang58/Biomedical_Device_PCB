@@ -779,7 +779,8 @@
   function generateCSV(secondsBack, sampleInterval) {
     const now = Date.now();
     const samplesPerSecond = 1000 / sampleInterval;
-    const timeWindow = Math.floor(secondsBack * samplesPerSecond);
+    // const timeWindow = Math.floor(secondsBack * samplesPerSecond);
+    const timeWindow = Math.floor(secondsBack * samplesPerSecond) - 18000;
 
     const fieldNames = [];
     for (const sensor in NiclaSenseME) {
