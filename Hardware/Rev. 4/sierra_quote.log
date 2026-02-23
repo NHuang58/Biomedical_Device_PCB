@@ -1,0 +1,39 @@
+02-18 19:01:30 sierra_kicad_order.action_sierra_quote 1287:Sierra Circuits Quote plugin version: 4.5 started
+02-18 19:01:30 STDERR 1671:/Users/nhuang/Documents/KiCad/9.0/3rdparty//plugins/sierra_kicad_order/action_sierra_quote.py:112: wxPyDeprecationWarning: Call to deprecated item. Use SetSizeHints instead.
+02-18 19:01:30 STDERR 1671:  self.SetSizeHintsSz(sz1, sz2)
+02-18 19:01:30 STDOUT 1671:send:
+02-18 19:01:30 STDOUT 1671:b'POST /kiprod/client HTTP/1.1\r\nAccept-Encoding: identity\r\nContent-Length: 52\r\nHost: api.protoexpress-api.net\r\nUser-Agent: Python-urllib/3.9\r\nContent-Type: application/json\r\nAuthorization: Basic 24ff0524-0d26-11f1-a8ad-cabc63fd3cc2\r\nConnection: close\r\n\r\n'
+02-18 19:01:30 STDOUT 1671:send:
+02-18 19:01:30 STDOUT 1671:b'{"client_id":"24ff0524-0d26-11f1-a8ad-cabc63fd3cc2"}'
+02-18 19:01:32 STDOUT 1671:reply:
+02-18 19:01:32 STDOUT 1671:'HTTP/1.1 200 OK\r\n'
+02-18 19:01:32 STDOUT 1671:header:
+02-18 19:01:32 STDOUT 1671:Date:
+02-18 19:01:32 STDOUT 1671:Thu, 19 Feb 2026 00:01:31 GMT
+02-18 19:01:32 STDOUT 1671:header:
+02-18 19:01:32 STDOUT 1671:Content-Type:
+02-18 19:01:32 STDOUT 1671:application/json
+02-18 19:01:32 STDOUT 1671:header:
+02-18 19:01:32 STDOUT 1671:Content-Length:
+02-18 19:01:32 STDOUT 1671:32
+02-18 19:01:32 STDOUT 1671:header:
+02-18 19:01:32 STDOUT 1671:Connection:
+02-18 19:01:32 STDOUT 1671:close
+02-18 19:01:32 STDOUT 1671:header:
+02-18 19:01:32 STDOUT 1671:x-amzn-RequestId:
+02-18 19:01:32 STDOUT 1671:ff6e8216-972c-4693-b77d-62ddfa757360
+02-18 19:01:32 STDOUT 1671:header:
+02-18 19:01:32 STDOUT 1671:Access-Control-Allow-Origin:
+02-18 19:01:32 STDOUT 1671:*
+02-18 19:01:32 STDOUT 1671:header:
+02-18 19:01:32 STDOUT 1671:Access-Control-Allow-Headers:
+02-18 19:01:32 STDOUT 1671:*
+02-18 19:01:32 STDOUT 1671:header:
+02-18 19:01:32 STDOUT 1671:x-amz-apigw-id:
+02-18 19:01:32 STDOUT 1671:ZAHiPGpqoAMEeag=
+02-18 19:01:32 STDOUT 1671:header:
+02-18 19:01:32 STDOUT 1671:Access-Control-Allow-Methods:
+02-18 19:01:32 STDOUT 1671:*
+02-18 19:01:32 STDOUT 1671:header:
+02-18 19:01:32 STDOUT 1671:X-Amzn-Trace-Id:
+02-18 19:01:32 STDOUT 1671:Root=1-699652da-2c9a24df310d5b933f8b7b2c;Parent=754c32a76be3dd58;Sampled=0;Lineage=2:565c4136:0

@@ -1,4 +1,4 @@
-26783494532834541
+26788810128798288
 Audio_Module
 Reverb_BTDR-1H
 Digital Reverberation Unit, http://www.belton.co.kr/inc/downfile.php?seq=17&file=pdf (footprint from http://www.uk-electronic.de/PDF/BTDR-1.pdf)
@@ -106372,6 +106372,20 @@ AD7150
 10
 10
 footprints
+ANTENNA
+
+
+0
+4
+4
+footprints
+ANT_915MHZ
+
+
+0
+4
+4
+footprints
 Arduino_Nicla_Sense
 https://docs.arduino.cc/hardware/nicla-vision
 
@@ -106385,6 +106399,13 @@ BAT_504
 0
 2
 2
+footprints
+FFC_4_Pin
+
+
+0
+6
+6
 footprints
 FFC_84952-8
 
