@@ -216,6 +216,7 @@
       
       <div style="margin:auto;">
         <select id="rateSelect" class="button-style">
+          <option value="10">1 Hz</option>
           <option value="10">25 Hz</option>
           <option value="10">50 Hz</option>
           <option value="10">100 Hz</option>
@@ -308,6 +309,7 @@
   */
 
   var maxRecords = 1200; // 20 Minutes
+  var setRecords = 60; // 60 Seconds
   
   // Default polling interval in ms (20ms = 50Hz)
   var currentPollingInterval = 20; 
@@ -776,10 +778,8 @@
     URL.revokeObjectURL(url);
   }
 
-  function generateCSV(secondsBack, sampleInterval) {
+function generateCSV(sampleInterval) {
     const now = Date.now();
-    const samplesPerSecond = 1000 / sampleInterval;
-    const timeWindow = Math.floor(secondsBack * samplesPerSecond);
 
     const fieldNames = [];
     for (const sensor in NiclaSenseME) {
@@ -792,17 +792,17 @@
     }
 
     let csv = 'timestamp,' + fieldNames.join(',') + '\n';
-    const maxSamples = Math.min(
+    
+    // Find the total number of samples actually stored in memory
+    const numSamples = Math.max(
       ...Object.values(NiclaSenseME)
         .map(sensor => {
           const sensorData = sensor?.data;
-          if (!sensorData) return Infinity;
+          if (!sensorData) return 0;
           return Math.max(...Object.values(sensorData).map(arr => arr.length));
         })
-        .filter(v => v > 0)
     );
 
-    const numSamples = Math.min(timeWindow, maxSamples);
     for (let i = numSamples - 1; i >= 0; i--) {
       const timestamp = new Date(now - (numSamples - 1 - i) * sampleInterval).toISOString();
       const row = [timestamp];
@@ -897,16 +897,15 @@
     }
 
     document.getElementById('exportButton').addEventListener('click', async () => {
-      // Use current settings as defaults
-      const secondsStr = prompt('Enter how much time of data to export (in seconds):', '60');
-      if (!secondsStr) return;
-      const secondsBack = parseFloat(secondsStr);
+      // Pass the polling interval, generateCSV will automatically grab everything
+      const csvData = generateCSV(currentPollingInterval);
       
-      const csvData = generateCSV(secondsBack, currentPollingInterval);
+      // Add a timestamp to the filename so you don't overwrite older files
       const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
-      const filename = `NiclaData.csv`;
+      const filename = `NiclaData_${timestamp}.csv`;
+      
       downloadCSV(filename, csvData);
-      snack(`Exported last ${secondsBack}s of data`, 0);
+      snack(`Exported all available data`, 0);
     });
 
     initGraph('gyroscope');
