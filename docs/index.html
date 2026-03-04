@@ -216,11 +216,11 @@
       
       <div style="margin:auto;">
         <select id="rateSelect" class="button-style">
-          <option value="10">1 Hz</option>
-          <option value="10">25 Hz</option>
-          <option value="10">50 Hz</option>
+          <option value="1000" selected>1 Hz (1 sec)</option>
+          <option value="40">25 Hz</option>
+          <option value="20">50 Hz</option>
           <option value="10">100 Hz</option>
-          <option value="10">200 Hz</option>
+          <option value="5">200 Hz</option>
           <option value="custom">Custom</option>
         </select>
         <input id="customRateInput" type="number" placeholder="ms" class="button-style hidden" />
@@ -308,11 +308,12 @@
   Demo showing simple dashboard of Arduino Nicla Sense ME
   */
 
-  var maxRecords = 1200; // 20 Minutes
+  var maxRecords = 18000; // At 50 Hz, this is more than a day of data
+  // setRecords not in use for now
   var setRecords = 60; // 60 Seconds
   
   // Default polling interval in ms (20ms = 50Hz)
-  var currentPollingInterval = 20; 
+  var currentPollingInterval = 1000; 
 
   var NiclaSenseME =
   {
