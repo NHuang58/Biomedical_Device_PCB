@@ -91,5 +91,5 @@ def analyze_nicla_data(file_path):
 
 if __name__ == "__main__":
     # Ensure the filename matches your uploaded file
-    file_name = 'AlarmData.csv' 
+    file_name = 'NiclaData.csv' 
     analyze_nicla_data(file_name)

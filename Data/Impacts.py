@@ -3,7 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # 1. Load and Preprocess Data
-PATH_NAME = "Movement1.csv"
+PATH_NAME = "NiclaData.csv"
 df = pd.read_csv(PATH_NAME)
 df["timestamp"] = pd.to_datetime(df["timestamp"])
 
