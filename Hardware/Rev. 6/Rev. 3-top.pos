@@ -1,0 +1,18 @@
+### Footprint positions - created on 2025-11-21T11:18:46-0500 ###
+### Printed by KiCad version 9.0.6
+## Unit = mm, Angle = deg.
+## Side : top
+# Ref     Val            Package                        PosX       PosY       Rot  Side
+C1        4.7_μF        C_0201_0603Metric          212.9678   -74.8678   90.0000  top
+C2        4.7_μF        C_0201_0603Metric          219.8678   -74.8678  -90.0000  top
+C4        1_uF           C_0201_0603Metric          210.5678   -84.7128   90.0000  top
+D1        RED            D_0201_0603Metric          215.4128   -78.6678  180.0000  top
+D2        1N4148WT       D_SOD-523                  222.9678   -71.7678    0.0000  top
+R1        2.2_kΩ        R_0201_0603Metric          215.4228   -77.7678  180.0000  top
+R2        470_Ω         R_0201_0603Metric          216.9678   -78.2228   90.0000  top
+R3        10_kΩ         R_0201_0603Metric          212.0678   -83.5678  180.0000  top
+R4        10_kΩ         R_0201_0603Metric          214.1678   -83.5678    0.0000  top
+U1        MCP73831-2-OT  SOT-23-5                   216.4678   -75.3678  180.0000  top
+U2        ~              Arduino_Nicla_Sense        207.6243   -74.1618    0.0000  top
+U3        W25Q128JVS     SOIC-8_5.3x5.3mm_P1.27mm   215.4728   -88.6803   90.0000  top
+## End
