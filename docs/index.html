@@ -5,7 +5,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
-  <title>Arduino Nicla Sense ME - Web Data Logger</title>
+  <title>Nicla Sense - Web Data Logger</title>
 
   <link href='https://fonts.googleapis.com/css?family=Roboto+Mono' rel='stylesheet'>
   <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
@@ -217,6 +217,7 @@
       <div style="margin:auto;">
         <select id="rateSelect" class="button-style">
           <option value="1000" selected>1 Hz (1 sec)</option>
+          <option value="100">10 Hz</option>
           <option value="40">25 Hz</option>
           <option value="20">50 Hz</option>
           <option value="10">100 Hz</option>
@@ -308,9 +309,9 @@
   Demo showing simple dashboard of Arduino Nicla Sense ME
   */
 
-  var maxRecords = 18000; // At 50 Hz, this is more than a day of data
+  var maxRecords = 18000000;
   // setRecords not in use for now
-  var setRecords = 60; // 60 Seconds
+  var setRecords = 15; // 60 Seconds
   
   // Default polling interval in ms (20ms = 50Hz)
   var currentPollingInterval = 1000; 
