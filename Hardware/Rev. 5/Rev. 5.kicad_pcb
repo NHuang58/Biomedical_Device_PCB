@@ -8052,17 +8052,6 @@
 			)
 		)
 	)
-	(gr_rect
-		(start 204.35 64.9)
-		(end 249.35 99.9)
-		(stroke
-			(width 0.2)
-			(type solid)
-		)
-		(fill no)
-		(layer "F.Cu")
-		(uuid "43369597-30ab-4dde-a0a0-c1592fb0148f")
-	)
 	(gr_line
 		(start 209.5 99.897767)
 		(end 228.7 99.897767)
