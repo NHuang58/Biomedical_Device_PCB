@@ -2,27 +2,25 @@
 <html>
 
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <title>Nicla Sense - Web Data Logger</title>
+  <title>Keel Bone Study - BLE Data Logger</title>
 
-  <link href='https://fonts.googleapis.com/css?family=Roboto+Mono' rel='stylesheet'>
+  <link href='https://fonts.googleapis.com/css?family=Roboto Mono' rel='stylesheet'>
   <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@jaames/iro/dist/iro.min.js"></script>
-
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/109/three.min.js"></script>
   <script src="GLTFLoader.js"></script>
-
   <style>
     * {
       font-family: 'Roboto Mono', sans-serif;
+      box-sizing: border-box;
     }
 
     body {
       color: white;
       background: #000000;
       font-size: 14px;
+      margin: 0;
+      padding: 20px;
     }
 
     #pairButton {
@@ -44,162 +42,123 @@
       background-color: #d8f41d;
       border: none;
       color: black;
-      padding: 1px;
+      padding: 2px 10px;
       text-align: center;
-      text-decoration: none;
       margin: 8px 5px;
       height: 25px;
-      width: 100px;
       border-radius: 20px;
       cursor: pointer;
       outline: none;
-    }
-    
-    /* Specific style for the select and input to match buttons */
-    select.button-style, input.button-style {
-      padding-left: 10px;
-      width: 110px; 
+      font-weight: bold;
     }
 
-    .container {
-      width: 960px;
-      height: 384px;
-      margin-top: 30px;
-      margin-bottom: 7.5px;
+    .input-style {
+      background-color: #222;
+      border: 1px solid #d8f41d;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+      width: 75px;
+      height: 25px;
+      outline: none;
+      text-align: center;
+    }
+
+    .status {
+      width: 100%;
+      max-width: 960px;
+      height: auto;
+      background-color: #111111;
+      border: 1px solid #000000;
+      padding: 12px;
+      margin: 0 auto 15px auto;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    #bluetooth {
+      font-size: 14px;
+      flex-grow: 1;
+      text-align: left;
+      padding-left: 10px;
+      color: #DAE3E3;
+    }
+
+    /* Side-by-Side Flex Split: 3D stays on Left, Dropdown Graphs stay on Right */
+    .dashboard-split {
+      width: 100%;
+      max-width: 960px;
       margin: 0 auto;
+      display: flex;
+      gap: 15px;
+      align-items: stretch;
     }
 
     .widget {
       background-color: #111111;
       border: 1px solid #000000;
-      border-radius: 0px;
       padding: 12px;
-      margin: 6px;
-      float: left;
       color: #DAE3E3;
-      padding-bottom: 16px;
     }
 
-    a {
-      color: white;
-      font-weight: bold;
-    }
-
-    .status {
-      margin-top: 1%;
-      width: 885px;
-      height: 42px;
-      color: white;
-      display: grid;
-      /* UPDATED: Adjusted grid to fit the new dropdown */
-      grid-template-columns: 15% 15% 55% 15%; 
-    }
-
-    #bluetooth {
-      font-size: 16px;
-      height: 50%;
-      margin: auto;
-    }
-
-    .square {
-      width: 192px;
-      height: 226px;
+    .left-side-3d {
+      width: 250px;
+      flex-shrink: 0;
       position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .right-side-plots {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
     }
 
     .label {
-      height: 15px;
-      display: inline;
       font-size: 12px;
-    }
-
-    .statusBar {
-      height: 100%;
-      vertical-align: middle;
-      text-align: center;
-    }
-
-    .digit {
-      font-size: 20px;
-      color: #888888;
-      float: right;
-    }
-
-    .short {
-      width: 192px;
-      height: 92px;
-    }
-
-    .double {
-      width: 423px;
-      height: 226px;
-    }
-
-    .graph {
-      width: 192px;
-      height: 177px;
-    }
-
-    .doublegraph {
-      width: 423px;
-      height: 177px;
-    }
-
-    .shortgraph {
-      width: 192px;
-      height: 81px;
-    }
-
-    .quaternion {
-      font-size: 10px;
-    }
-
-    #color-picker-container {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 100%;
-      margin: auto;
-    }
-
-    #snackbar {
-      height: 23px;
+      font-weight: bold;
+      margin-bottom: 8px;
       display: block;
-      visibility: visible;
-      text-align: center;
-      background-color: #374146;
-      border-radius: 3px;
-      padding: 4px 13px 4px 13px;
-      margin: 16px 7px 7px;
-      display: inline-block;
+      width: 100%;
+    }
+
+    .graph-container {
+      width: 100%;
+      height: 220px;
     }
 
     #canvasDigits {
-      width: 75%;
-      margin: auto;
+      width: 100%;
+      text-align: center;
+      font-size: 10px;
+      margin-top: 5px;
     }
 
     #canvasDigits span {
-      width: 29%;
       display: inline-block;
+      margin: 0 4px;
+      background: rgba(255,255,255,0.1);
+      padding: 2px 5px;
+      border-radius: 3px;
     }
 
-    #snackbar.show {
-      -webkit-animation: fadein 0.5s, 0.1s;
-      animation: fadein 0.5s, 0.1s;
-    }
-
-    @-webkit-keyframes fadein {
-      from { visibility: hidden; opacity: 0; }
-      to { visibility: visible; opacity: 1; }
-    }
-
-    @keyframes fadein {
-      from { visibility: hidden; opacity: 0; }
-      to { visibility: visible; opacity: 1; }
-    }
-    
     .hidden {
+      display: none !important;
+    }
+
+    #snackbar {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #374146;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 4px;
+      z-index: 1000;
       display: none;
     }
   </style>
@@ -207,722 +166,436 @@
 
 <body>
 
-  <div class="container">
-
-    <div id="snackbar"></div>
+  <div class="status">
+    <button id="pairButton">CONNECT</button>
     
-    <div class="status widget">
-      <button id="pairButton">CONNECT</button>
-      
-      <div style="margin:auto;">
-        <select id="rateSelect" class="button-style">
-          <option value="1000" selected>1 Hz (1 sec)</option>
-          <option value="100">10 Hz</option>
-          <option value="40">25 Hz</option>
-          <option value="20">50 Hz</option>
-          <option value="10">100 Hz</option>
-          <option value="5">200 Hz</option>
-          <option value="custom">Custom</option>
-        </select>
-        <input id="customRateInput" type="number" placeholder="ms" class="button-style hidden" />
-      </div>
-
-      <div class="label statusBar" id="bluetooth">Click the connect button to connect your device</div>
-      
-      <button id="exportButton" class="button-style">EXPORT</button>
+    <div style="display: flex; align-items: center; gap: 4px;">
+      <label style="font-size:12px;">Sample Rate:</label>
+      <select id="rateSelect" class="button-style">
+        <option value="5">5 Hz (0.20s)</option>
+        <option value="10">10 Hz (0.10s)</option>
+        <option value="20" selected>20 Hz (0.05s)</option>
+        <option value="50">50 Hz (0.02s)</option>
+        <option value="100">100 Hz (0.01s)</option>
+        <option value="custom">Custom Hz</option>
+      </select>
+      <input id="customRateInput" type="number" class="input-style hidden" min="1" max="200" value="25" placeholder="Hz">
     </div>
 
+    <div style="display: flex; align-items: center; gap: 4px;">
+      <label style="font-size:12px;">Active Plot View:</label>
+      <select id="plotViewSelect" class="button-style" style="min-width: 150px;">
+        <option value="accelerometer" selected>Accelerometer</option>
+        <option value="gyroscope">Gyroscope</option>
+        <option value="temperature">Temperature</option>
+        <option value="force">Force Sensor</option>
+      </select>
+    </div>
 
-    <div class="square widget" id="3d">
-      <div class="label">&#128230; Quaternion Rotation</div>
-      <div class="quaternion" id="canvasDigits">
+    <div id="bluetooth">Click CONNECT to launch hardware sync pipeline...</div>
+    
+    <button id="exportButton" class="button-style">EXPORT CSV</button>
+  </div>
+
+  <div class="dashboard-split">
+    
+    <div class="widget left-side-3d">
+      <span class="label">3D Rotation Matrix</span>
+      <div id="canvasDigits">
         <span id="xQuaternion">x: -</span>
         <span id="yQuaternion">y: -</span>
         <span id="zQuaternion">z: -</span>
       </div>
     </div>
 
-    <div class="double widget">
-      <div class="label">&#128640; Accelerometer</div>
-      <div id="accelerometer" class="doublegraph"></div>
-    </div>
+    <div class="widget right-side-plots">
+      
+      <div id="acc-plot-panel" class="plot-view-block">
+        <span class="label">Accelerometer Profile Data (G)</span>
+        <div id="accelerometer" class="graph-container"></div>
+      </div>
 
-    <div class="square widget">
-      <div class="label">&#128171; Gyroscope</div>
-      <div class="label" id="gyroscope-value"></div>
-      <div id="gyroscope" class="graph"></div>
-    </div>
+      <div id="gyro-plot-panel" class="plot-view-block hidden">
+        <span class="label">Gyroscope Dynamic Matrix (dps)</span>
+        <div id="gyroscope" class="graph-container"></div>
+      </div>
 
-    <div class="square widget">
-      <div class="label">&#128161; RGB LED control</div>
-      <div id="color-picker-container" class="graph"></div>
-    </div>
+      <div id="temp-plot-panel" class="plot-view-block hidden">
+        <span class="label">Core Temperature Monitor (°C)</span>
+        <div id="temperature" class="graph-container"></div>
+      </div>
 
-    <div class="short widget">
-      <div class="label">&#127777; Temperature - </div>
-      <div class="label" id="temperature-value"></div>
-      <div class="label">&deg;C</div>
-      <div class="shortgraph" id="temperature"></div>
-    </div>
+      <div id="force-plot-panel" class="plot-view-block hidden">
+        <span class="label">Force Analog Transducer (A1 Input)</span>
+        <div id="forcePlot" class="graph-container"></div>
+      </div>
 
-    <div class="short widget">
-      <div class="label">&#128167; Humidity - </div>
-      <div class="label" id="humidity-value"></div>
-      <div class="label">%</div>
-      <div class="shortgraph" id="humidity"></div>
-
-    </div>
-
-    <div class="short widget">
-      <div class="label">&#9925; Pressure - </div>
-      <div class="label" id="pressure-value"></div>
-      <div class="label">kPa</div>
-      <div class="shortgraph" id="pressure"></div>
-    </div>
-
-    <div class="short widget">
-      <div class="label">&#127968; Indoor Air Quality - </div>
-      <div class="label" id="bsec-value"></div>
-      <div class="label"></div>
-      <div class="shortgraph" id="bsec"></div>
-    </div>
-
-    <div class="short widget">
-      <div class="label">&#127793; Co2 Value -</div>
-      <div class="label" id="co2-value"></div>
-      <div class="label"></div>
-      <div class="shortgraph" id="co2"></div>
-    </div>
-
-    <div class="short widget">
-      <div class="label">&#x1F4A8; Gas Value -</div>
-      <div class="label" id="gas-value"></div>
-      <div class="label"></div>
-      <div class="shortgraph" id="gas"></div>
     </div>
 
   </div>
-</body>
 
-<script type="text/javascript">
-  /*
-  Demo showing simple dashboard of Arduino Nicla Sense ME
-  */
+  <div id="snackbar"></div>
 
-  var maxRecords = 18000000;
-  // setRecords not in use for now
-  var setRecords = 15; // 60 Seconds
-  
-  // Default polling interval in ms (20ms = 50Hz)
-  var currentPollingInterval = rateSelect; 
+  <script type="text/javascript">
+    let db = null;
+    let isConnected = false;
+    let sessionStartTime = null;
+    let lastSavedTimestamps = { accelerometer: 0, gyroscope: 0, temperature: 0, force: 0 };
 
-  var NiclaSenseME =
-  {
-    temperature:
-    {
-      uuid: '19b10000-2001-537e-4f6c-d104768a1214',
-      properties: ['BLERead'],
-      structure: ['Float32'],
-      data: { temperature: [] }
-    },
-    humidity:
-    {
-      uuid: '19b10000-3001-537e-4f6c-d104768a1214',
-      properties: ['BLERead'],
-      structure: ['Uint8'],
-      data: { humidity: [] }
-    },
-    pressure:
-    {
-      uuid: '19b10000-4001-537e-4f6c-d104768a1214',
-      properties: ['BLERead'],
-      structure: ['Float32'],
-      data: { pressure: [] }
-    },
-    accelerometer:
-    {
-      uuid: '19b10000-5001-537e-4f6c-d104768a1214',
-      properties: ['BLENotify'],
-      structure: ['Float32', 'Float32', 'Float32'],
-      data: { 'Ax': [], 'Ay': [], 'Az': [] }
-    },
-    gyroscope:
-    {
-      uuid: '19b10000-6001-537e-4f6c-d104768a1214',
-      properties: ['BLENotify'],
-      structure: ['Float32', 'Float32', 'Float32'],
-      data: { 'x': [], 'y': [], 'z': [] }
-    },
-    led: {
-      uuid: '19b10000-8001-537e-4f6c-d104768a1214',
-      properties: ['BLEWrite'],
-      structure: ['Uint8', 'Uint8', 'Uint8'],
-      data: { 'R': [], 'G': [], 'B': [] },
-      writeBusy: false,
-      writeValue: null
-    },
-    quaternion: {
-      uuid: '19b10000-7001-537e-4f6c-d104768a1214',
-      properties: ['BLENotify'],
-      structure: ['Float32', 'Float32', 'Float32', 'Float32'],
-      data: { 'x': [], 'y': [], 'z': [], 'w': [] },
-      writeBusy: false, 
-      writeValue: null
-    },
-    bsec:
-    {
-      uuid: '19b10000-9001-537e-4f6c-d104768a1214',
-      properties: ['BLERead'],
-      structure: ['Float32'],
-      data: { 'bsec': [] }
-    },
-    co2:
-    {
-      uuid: '19b10000-9002-537e-4f6c-d104768a1214',
-      properties: ['BLERead'],
-      structure: ['Uint32'],
-      data: { 'co2': [] }
-    },
-    gas:
-    {
-      uuid: '19b10000-9003-537e-4f6c-d104768a1214',
-      properties: ['BLERead'],
-      structure: ['Uint32'],
-      data: { 'gas': [] }
-    }
-  }
-
-  const sensors = Object.keys(NiclaSenseME);
-  const SERVICE_UUID = '19b10000-0000-537e-4f6c-d104768a1214';
-  var bytesReceived = 0;
-  var bytesPrevious = 0;
-  var isConnected = false;
-
-  var pairButton, BLEstatus, snackBar, rateSelect, customRateInput;
-
-  function msg(m) {
-    BLEstatus.innerHTML = m;
-  }
-
-  function snack(m, warningLevel) {
-    snackBar.style.visibility = "visible";
-    snackBar.className = "show";
-    var warnEmoji = warningLevel ? '☝️  ' : '✅  ';
-    setTimeout(function () { snackBar.className = snackBar.className.replace("show", ""); }, 501);
-    snackBar.innerHTML = warnEmoji + m + ' <span onClick=hideSnack() style="cursor:pointer; margin-left: 15px"> ✖ </span> ';
-  }
-
-  function hideSnack() {
-    snackBar.style.visibility = "hidden";
-  }
-
-  // UPDATED: Logic to change polling interval dynamically
-  function setPollingInterval(ms) {
-    currentPollingInterval = ms;
-    if(!isConnected) return; // Only apply if connected, otherwise connect() will handle it
-
-    for (const sensor of sensors) {
-      if (NiclaSenseME[sensor].properties.includes("BLERead")) {
-        // Clear existing interval
-        if (typeof NiclaSenseME[sensor].polling !== 'undefined') {
-          clearInterval(NiclaSenseME[sensor].polling);
-        }
-        // Set new interval
-        NiclaSenseME[sensor].polling = setInterval(function () {
-          NiclaSenseME[sensor].characteristic.readValue()
-          .then(function (data) { handleIncoming(NiclaSenseME[sensor], data); })
-          .catch(err => console.log(err)); // Catch errors if read happens during disconnect
-        }, currentPollingInterval);
-      }
-    }
-    console.log("Polling rate updated to: " + ms + "ms");
-  }
-
-  async function connect() {
-    pairButton.style.backgroundColor = "grey";
-    pairButton.style.color = 'black';
-    pairButton.innerHTML = "PAIRING";
-    msg('requesting device ...');
-
-    try {
-      const device = await navigator.bluetooth.requestDevice({
-        acceptAllDevices: true,
-        optionalServices: [SERVICE_UUID]
-      });
-
-      msg('connecting to device ...');
-      device.addEventListener('gattserverdisconnected', onDisconnected);
-      const server = await device.gatt.connect();
-      isConnected = true;
-
-      msg('getting primary service ...');
-      const service = await server.getPrimaryService(SERVICE_UUID);
-
-      for (const sensor of sensors) {
-        msg('characteristic ' + sensor + "...");
-        NiclaSenseME[sensor].characteristic = await service.getCharacteristic(NiclaSenseME[sensor].uuid);
-        
-        if (NiclaSenseME[sensor].properties.includes("BLENotify")) {
-          NiclaSenseME[sensor].characteristic.addEventListener('characteristicvaluechanged', function (event) { handleIncoming(NiclaSenseME[sensor], event.target.value); });
-          await NiclaSenseME[sensor].characteristic.startNotifications();
-        }
-        
-        // UPDATED: Use dynamic interval
-        if (NiclaSenseME[sensor].properties.includes("BLERead")) {
-          NiclaSenseME[sensor].polling = setInterval(function () {
-            NiclaSenseME[sensor].characteristic.readValue().then(function (data) { handleIncoming(NiclaSenseME[sensor], data); })
-          }, currentPollingInterval);
-        }
-
-        NiclaSenseME[sensor].rendered = false;
-      }
-      pairButton.style.backgroundColor = 'green';
-      pairButton.style.color = 'white';
-      pairButton.innerHTML = "PAIRED";
-      msg('Characteristics configured');
-      snack('Connected.', 0);
-
-      initColorPicker();
-    } catch (err) {
-      console.error('Connect error', err);
-      pairButton.style.backgroundColor = '#d8f41d';
-      pairButton.style.color = 'black';
-      pairButton.innerHTML = "CONNECT";
-      msg('Error during connection');
-      snack('Connection failed or cancelled', 1);
-      isConnected = false;
-    }
-  }
-
-  function handleIncoming(sensor, dataReceived) {
-    const columns = Object.keys(sensor.data); 
-    const typeMap = {
-      "Uint8": { fn: DataView.prototype.getUint8, bytes: 1 },
-      "Uint16": { fn: DataView.prototype.getUint16, bytes: 2 },
-      "Uint32": { fn: DataView.prototype.getUint32, bytes: 4 },
-      "Int16": { fn: DataView.prototype.getInt16, bytes: 2 },
-      "Float32": { fn: DataView.prototype.getFloat32, bytes: 4 }
+    // Matches your original layout dictionary completely to pass browser GATT profile check
+    var NiclaSenseME = {
+      temperature: { uuid: '19b10000-2001-537e-4f6c-d104768a1214', properties: ['BLERead'], structure: ['Float32'], data: { temperature: [] } },
+      humidity:    { uuid: '19b10000-3001-537e-4f6c-d104768a1214', properties: ['BLERead'], structure: ['Uint8'], data: { humidity: [] } },
+      pressure:    { uuid: '19b10000-4001-537e-4f6c-d104768a1214', properties: ['BLERead'], structure: ['Float32'], data: { pressure: [] } },
+      accelerometer: { uuid: '19b10000-5001-537e-4f6c-d104768a1214', properties: ['BLENotify'], structure: ['Float32', 'Float32', 'Float32'], data: { 'Ax': [], 'Ay': [], 'Az': [] } },
+      gyroscope:     { uuid: '19b10000-6001-537e-4f6c-d104768a1214', properties: ['BLENotify'], structure: ['Float32', 'Float32', 'Float32'], data: { 'x': [], 'y': [], 'z': [] } },
+      led: { uuid: '19b10000-8001-537e-4f6c-d104768a1214', properties: ['BLEWrite'], structure: ['Uint8', 'Uint8', 'Uint8'], data: { 'R': [], 'G': [], 'B': [] }, writeBusy: false, writeValue: null },
+      quaternion:  { uuid: '19b10000-7001-537e-4f6c-d104768a1214', properties: ['BLENotify'], structure: ['Float32', 'Float32', 'Float32', 'Float32'], data: { 'x': [], 'y': [], 'z': [], 'w': [] }, writeBusy: false, writeValue: null },
+      bsec:        { uuid: '19b10000-9001-537e-4f6c-d104768a1214', properties: ['BLERead'], structure: ['Float32'], data: { 'bsec': [] } },
+      co2:         { uuid: '19b10000-9002-537e-4f6c-d104768a1214', properties: ['BLERead'], structure: ['Uint32'], data: { 'co2': [] } },
+      gas:         { uuid: '19b10000-9003-537e-4f6c-d104768a1214', properties: ['BLERead'], structure: ['Uint32'], data: { 'gas': [] } }
     };
-    var packetPointer = 0, i = 0;
 
-    sensor.structure.forEach(function (dataType) {
-      var dataViewFn = typeMap[dataType].fn.bind(dataReceived);
-      var unpackedValue = dataViewFn(packetPointer, true);
-      sensor.data[columns[i]].push(unpackedValue);
-      if (sensor.data[columns[i]].length > maxRecords) { sensor.data[columns[i]].shift(); }
-      packetPointer += typeMap[dataType].bytes;
-      bytesReceived += typeMap[dataType].bytes;
-      i++;
-    });
-    sensor.rendered = false; 
-  }
+    const sensors = Object.keys(NiclaSenseME);
+    const SERVICE_UUID = '19b10000-0000-537e-4f6c-d104768a1214';
 
-  function onDisconnected(event) {
-    let device = event.target;
-    pairButton.style.backgroundColor = "red";
-    pairButton.innerHTML = "PAIR NICLA";
-    snack("Device disconnected, please retry", 1)
-    isConnected = false;
+    const pairButton = document.getElementById('pairButton');
+    const BLEstatus = document.getElementById('bluetooth');
 
-    for (const sensor of sensors) {
-      if (typeof NiclaSenseME[sensor].polling !== 'undefined') {
-        clearInterval(NiclaSenseME[sensor].polling);
-      }
-    }
-    const colorPickerElement = document.getElementById("color-picker-container");
-    if (colorPickerElement && colorPickerElement.firstChild) {
-      try { colorPickerElement.removeChild(colorPickerElement.firstChild); } catch (e) { /*ignore*/ }
-    }
-
-    snack('Device ' + (device && device.name ? device.name : '') + ' has been disconnected.', 1);
-    msg("Disconnected");
-
-    try {
-      if (ledLight && ledLight.color) ledLight.color.setRGB(255, 0, 0);
-      if (ledMaterial && ledMaterial.color) ledMaterial.color.setRGB(255, 0, 0);
-    } catch (e) { /*ignore if not initialized*/ }
-  }
-
-  function BLEwriteTo(sensor) {
-    if (NiclaSenseME[sensor].writeBusy) return;
-    if (!NiclaSenseME[sensor].characteristic) return;
-    NiclaSenseME[sensor].writeBusy = true; 
-    NiclaSenseME[sensor].characteristic.writeValue(NiclaSenseME[sensor].writeValue)
-      .then(_ => {
-        NiclaSenseME[sensor].writeBusy = false;
-      })
-      .catch(error => {
-        console.log(error);
-        NiclaSenseME[sensor].writeBusy = false;
+    function initDatabase() {
+      return new Promise((resolve, reject) => {
+        const request = indexedDB.open("NiclaSenseStorageEngine", 1);
+        request.onupgradeneeded = function(e) {
+          let database = e.target.result;
+          if (!database.objectStoreNames.contains("telemetry_logs")) {
+            database.createObjectStore("telemetry_logs", { autoIncrement: true });
+          }
+        };
+        request.onsuccess = function(e) { db = e.target.result; resolve(); };
+        request.onerror = function(e) { reject(e); };
       });
-  }
+    }
 
-  var ledMaterial, ledObject, ledLight;
+    function commitRecordToDB(record) {
+      if (!db) return;
+      const tx = db.transaction(["telemetry_logs"], "readwrite");
+      const store = tx.objectStore("telemetry_logs");
+      store.add(record);
+    }
 
-  function initColorPicker() {
-    var rgb_values = Uint8Array.of(0, 0, 255);
-    NiclaSenseME['led'].writeValue = rgb_values;
-    BLEwriteTo('led');
-    try {
-      if (ledMaterial && ledMaterial.color) ledMaterial.color.setRGB(0, 0, 255);
-      if (ledLight && ledLight.color) ledLight.color.setRGB(0, 0, 255);
-    } catch (e) { /*ignore*/ }
+    function msg(m) { BLEstatus.innerHTML = m; }
 
-    NiclaSenseME.led.colorPicker = new iro.ColorPicker("#color-picker-container", {
-      width: 150,
-      color: "rgb(0, 0, 255)",
-      borderWidth: 1,
-      borderColor: "#fff",
-      sliderHeight: 6,
-      sliderMargin: 6
-    });
-    NiclaSenseME.led.colorPicker.on('color:change', updateModelLed);
-    function updateModelLed(color) {
+    function snack(m, warningLevel) {
+      const el = document.getElementById("snackbar");
+      el.style.display = "block";
+      el.innerText = (warningLevel ? '☝️ ' : '✅ ') + m;
+      setTimeout(() => { el.style.display = "none"; }, 3000);
+    }
+
+    function getTargetIntervalMs() {
+      const rateSelect = document.getElementById('rateSelect');
+      let hz = (rateSelect.value === 'custom') ? parseInt(document.getElementById('customRateInput').value) : parseInt(rateSelect.value);
+      return 1000 / (hz || 20);
+    }
+
+    // Direct drop-in match to your 100% working baseline connection framework
+    async function connect() {
+      pairButton.style.backgroundColor = "grey";
+      pairButton.style.color = 'black';
+      pairButton.innerHTML = "PAIRING";
+      msg('requesting device ...');
+
       try {
-        if (ledLight && ledLight.color) ledLight.color.setHex("0x" + color.hexString.substring(1, 7));
-        if (ledMaterial && ledMaterial.color) ledMaterial.color.set(color.hexString);   
-      } catch (e) { }
-      var rgb_values = Uint8Array.of(color.rgb.r, color.rgb.g, color.rgb.b);
-      NiclaSenseME['led'].writeValue = rgb_values;
-      BLEwriteTo('led');
-    }
-  }
+        const device = await navigator.bluetooth.requestDevice({
+          filters: [{ services: [SERVICE_UUID] }]
+        });
 
-  const colors = ["#FF355E", "#FD5B20", "#FF6037", "#FF9966", "#FF9933", "#FFCC33", "#FFFF66", "#FFFF66", "#CCFF00", "#66FF66", "#AAF0D1", "#50BFE6", "#FF6EFF", "#EE34D2", "#FF00CC", "#FF00CC"];
-  var colorIndex = 0;
-  function initGraph(sensor) {
-    var title = sensor;
-    var series = Object.keys(NiclaSenseME[sensor].data);
-    var format = [];
-    series.forEach(function (item) {
-      colorIndex++;
-      if (colorIndex > colors.length) { colorIndex = 0; }
-      format.push({
-        y: [],
-        name: item,
-        mode: 'lines',
-        width: 1,
-        line: { width: 1, color: colors[colorIndex] }
-      });
-    });
+        msg('connecting to device ...');
+        device.addEventListener('gattserverdisconnected', onDisconnected);
+        const server = await device.gatt.connect();
 
-    Plotly.plot(title, format, {
-      plot_bgcolor: '#111111',
-      paper_bgcolor: '#111111',
-      margin: { l: 8, r: 8, b: 18, t: 18 },
-      showlegend: false,
-      yaxis: { 'showticklabels': false },
-      xaxis: {
-        'range': [0, maxRecords],
-        'showticklabels': false,
-        'autorange': false,
-        'showgrid': true,
-        'zeroline': true,
-        tickfont: { size: 8 }
+        msg('getting primary service ...');
+        const service = await server.getPrimaryService(SERVICE_UUID);
+
+        sessionStartTime = Date.now();
+
+        for (const sensor of sensors) {
+          msg('characteristic ' + sensor + "...");
+          NiclaSenseME[sensor].characteristic = await service.getCharacteristic(NiclaSenseME[sensor].uuid);
+          
+          if (NiclaSenseME[sensor].properties.includes("BLENotify")) {
+            NiclaSenseME[sensor].characteristic.addEventListener('characteristicvaluechanged', function (event) { 
+              handleIncoming(NiclaSenseME[sensor], event.target.value, sensor); 
+            });
+            await NiclaSenseME[sensor].characteristic.startNotifications();
+          }
+          
+          if (NiclaSenseME[sensor].properties.includes("BLERead")) {
+            NiclaSenseME[sensor].polling = setInterval(function () {
+              if(!isConnected) return;
+              NiclaSenseME[sensor].characteristic.readValue().then(function (data) { 
+                handleIncoming(NiclaSenseME[sensor], data, sensor); 
+              }).catch(e => {});
+            }, 500);
+          }
+          NiclaSenseME[sensor].rendered = false;
+        }
+        
+        isConnected = true;
+        pairButton.style.backgroundColor = 'green';
+        pairButton.style.color = 'white';
+        pairButton.innerHTML = "PAIRED";
+        msg('Characteristics configured');
+        snack('Connected.', 0);
+      } catch (err) {
+        console.error("GATT Critical error:", err);
+        pairButton.style.backgroundColor = '#d8f41d';
+        pairButton.style.color = 'black';
+        pairButton.innerHTML = "CONNECT";
+        msg('Connection failed or rejected');
       }
     }
-    );
-  }
 
-  var renderer = new THREE.WebGLRenderer({ antialias: true, preserveDrawingBuffer: true });
-  var scene = new THREE.Scene();
-  var camera = new THREE.PerspectiveCamera(75, 1, 1, 10000);
-  var arduinoModel;
+    function handleIncoming(sensorObj, dataReceived, sensorName) {
+      const now = Date.now();
+      
+      // Decimation engine filters data on the client side based on sample rates
+      if (['accelerometer', 'gyroscope', 'temperature'].includes(sensorName)) {
+        if (now - lastSavedTimestamps[sensorName] < getTargetIntervalMs()) return;
+        lastSavedTimestamps[sensorName] = now;
+      }
 
-  function init3D() {
-    try {
-      var container = document.getElementById('3d');
-      var loader = new THREE.GLTFLoader();
-      var canvasDigits = document.getElementById('canvasDigits');
-      scene.background = new THREE.Color(0x58585A);
-      renderer.setSize(177, 177);
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+      const columns = Object.keys(sensorObj.data); 
+      const typeMap = {
+        "Uint8": { fn: DataView.prototype.getUint8, bytes: 1 },
+        "Uint16": { fn: DataView.prototype.getUint16, bytes: 2 },
+        "Uint32": { fn: DataView.prototype.getUint32, bytes: 4 },
+        "Int16": { fn: DataView.prototype.getInt16, bytes: 2 },
+        "Float32": { fn: DataView.prototype.getFloat32, bytes: 4 }
+      };
+      var packetPointer = 0, i = 0;
+      let dbPayload = { timestamp: now, sensor: sensorName };
 
-      container.insertBefore(renderer.domElement, canvasDigits);
-      renderer.domElement.style.margin = "9px";
-      loader.load('models/niclaSenseME.glb',
-        function (gltf) {
-          arduinoModel = gltf.scene;
-          scene.add(arduinoModel);
-          var geometry = new THREE.BoxGeometry(1, 1, 1);
-          ledMaterial = new THREE.MeshBasicMaterial({ color: 0x111111 });
-          ledObject = new THREE.Mesh(geometry, ledMaterial);
-          ledObject.position.set(9, -10, -1);
-          ledLight = new THREE.PointLight(0x111111, 3, 40);
-          ledLight.color.setRGB(0, 255, 0);
-          ledLight.position.set(9, -10, -1.2);
-          ledMaterial.color.setRGB(0, 255, 0);
-          arduinoModel.add(ledObject);
-          arduinoModel.add(ledLight);
-          arduinoModel.rotation.x = 90 * (Math.PI / 180); 
+      sensorObj.structure.forEach(function (dataType) {
+        var dataViewFn = typeMap[dataType].fn.bind(dataReceived);
+        var unpackedValue = dataViewFn(packetPointer, true);
+        
+        sensorObj.data[columns[i]].push(unpackedValue);
+        dbPayload[columns[i]] = unpackedValue;
 
-          var sphereSize = 1;
-          const color = 0xFFFFFF;
-          const intensity = 1;
-          const light = new THREE.DirectionalLight(color, intensity);
-          light.position.set(-20, 100, -10);
-          light.target.position.set(0, 0, 0);
-          scene.add(light);
-          scene.add(light.target);
-          var hemiLight = new THREE.HemisphereLight(0xffffff, 0xffffff, 1);
-          scene.add(hemiLight);
-          camera.position.set(0, 25, 0);
-          camera.rotation.y = Math.PI; 
-          camera.lookAt(new THREE.Vector3(0, 0, 0));
-          renderer.render(scene, camera);
-        },
-        undefined,
-        function (error) {
-          console.error('Error loading GLTF:', error);
+        // Caps local application view cache matrix array context length
+        if (sensorObj.data[columns[i]].length > 1500) { 
+          sensorObj.data[columns[i]].shift(); 
         }
-      );
-    } catch (e) {
-      console.error('init3D error', e);
+        packetPointer += typeMap[dataType].bytes;
+        i++;
+      });
+
+      if (['accelerometer', 'gyroscope', 'temperature'].includes(sensorName)) {
+        commitRecordToDB(dbPayload);
+      }
+      sensorObj.rendered = false; 
     }
-  }
 
-  function colorBars(sensor) {
-    const canvas = document.getElementById('colors');
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
-    const thickness = canvas.width / maxRecords;
-    ctx.fillStyle = "#111111";
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-    for (i = 0; i < maxRecords; i++) {
-      R = NiclaSenseME[sensor].data.R[i];
-      G = NiclaSenseME[sensor].data.G[i];
-      B = NiclaSenseME[sensor].data.B[i];
-      total = R + G + B;
-      R = R / total * 255; G = G / total * 255; B = B / total * 255;
-      ctx.fillStyle = "rgba(" + R + "," + G + "," + B + ")";
-      ctx.fillRect(i * thickness, 128, thickness - 1, -total / 5);
+    function onDisconnected(event) {
+      isConnected = false;
+      pairButton.style.backgroundColor = "red";
+      pairButton.innerHTML = "CONNECT";
+      snack("Device disconnected.", 1);
+      for (const sensor of sensors) {
+        if (typeof NiclaSenseME[sensor].polling !== 'undefined') clearInterval(NiclaSenseME[sensor].polling);
+      }
     }
-  }
-  Array.prototype.latest = function () { return this[this.length - 1]; };
 
-  function graph(sensor) {
-    var labels = Object.keys(NiclaSenseME[sensor].data);
-    var values = [];
-    labels.forEach(function (label) {
-      values.push(NiclaSenseME[sensor].data[label]);
-    });
-    Plotly.restyle(sensor, { y: values });
-  }
+    function initGraph(sensor, targetDivId) {
+      var series = Object.keys(NiclaSenseME[sensor].data);
+      var format = [];
+      const colorsList = ["#FF355E", "#66FF66", "#50BFE6"];
+      
+      series.forEach(function (item, idx) {
+        format.push({ x: [], y: [], name: item, mode: 'lines', line: { width: 1.2, color: colorsList[idx % 3] } });
+      });
 
-  function digit(sensor) {
-    const value = NiclaSenseME[sensor].data[sensor].latest();
-    const div = document.getElementById(sensor + "-value");
-    if (!Number.isNaN(value)) { div.innerHTML = Math.round(value * 10) / 10; };
-  }
+      // Configures correct linear ranges explicitly to bypass calendar glitches
+      Plotly.plot(targetDivId || sensor, format, {
+        plot_bgcolor: '#111111', paper_bgcolor: '#111111',
+        margin: { l: 45, r: 15, b: 25, t: 10 },
+        showlegend: true, legend: { font: { color: '#fff', size: 9 } },
+        yaxis: { tickfont: { color: '#fff', size: 9 }, gridcolor: '#222' },
+        xaxis: { type: 'linear', range: [0, 60], tickmode: 'linear', tick0: 0, dtick: 10, tickfont: { color: '#fff', size: 9 }, gridcolor: '#222' }
+      });
+    }
 
-  function update3d(sensor) {
-    var x = NiclaSenseME['quaternion'].data.x.length ? NiclaSenseME['quaternion'].data.x.latest() : 0;
-    var y = NiclaSenseME['quaternion'].data.y.length ? NiclaSenseME['quaternion'].data.y.latest() : 0;
-    var z = NiclaSenseME['quaternion'].data.z.length ? NiclaSenseME['quaternion'].data.z.latest() : 0;
-    var w = NiclaSenseME['quaternion'].data.w.length ? NiclaSenseME['quaternion'].data.w.latest() : 1;
+    function initForceGraph() {
+      Plotly.plot('forcePlot', [{ x: [], y: [], name: 'Raw Pin 8', mode: 'lines', line: { color: '#AAF0D1' } }], {
+        plot_bgcolor: '#111111', paper_bgcolor: '#111111',
+        margin: { l: 45, r: 15, b: 25, t: 10 },
+        yaxis: { tickfont: { color: '#fff', size: 9 }, gridcolor: '#222' },
+        xaxis: { type: 'linear', range: [0, 60], tickmode: 'linear', tick0: 0, dtick: 10, tickfont: { color: '#fff', size: 9 }, gridcolor: '#222' }
+      });
+    }
 
-    if (arduinoModel) {
+    // Standard Three.js Rendering Logic
+    var renderer = new THREE.WebGLRenderer({ antialias: true });
+    var scene = new THREE.Scene();
+    var camera = new THREE.PerspectiveCamera(75, 1, 1, 10000);
+    var arduinoModel;
+
+    function init3D() {
+      var container = document.querySelector('.left-side-3d');
+      var loader = new THREE.GLTFLoader();
+      scene.background = new THREE.Color(0x58585A);
+      renderer.setSize(180, 180);
+      renderer.setPixelRatio(2);
+      container.insertBefore(renderer.domElement, document.getElementById('canvasDigits'));
+
+      loader.load('models/niclaSenseME.glb', function (gltf) {
+        arduinoModel = gltf.scene;
+        scene.add(arduinoModel);
+        arduinoModel.rotation.x = 90 * (Math.PI/180);
+        
+        const light = new THREE.DirectionalLight(0xFFFFFF, 1);
+        light.position.set(-20, 100, -10);
+        scene.add(light);
+        scene.add(new THREE.HemisphereLight(0xffffff, 0xffffff, 1));
+
+        camera.position.set(0, 25, 0);
+        camera.rotation.y = Math.PI;
+        camera.lookAt(new THREE.Vector3(0, 0, 0));
+        renderer.render(scene, camera);
+      });
+    }
+
+    Array.prototype.latest = function () { return this[this.length - 1]; };
+
+    function graph(sensor) {
+      if (!sessionStartTime) return;
+      const element = NiclaSenseME[sensor];
+      const columns = Object.keys(element.data);
+      if(element.data[columns[0]].length === 0) return;
+
+      let pointsCount = element.data[columns[0]].length;
+      let timeline = [];
+      let step = getTargetIntervalMs() / 1000;
+      for(let k = 0; k < pointsCount; k++) timeline.push(k * step);
+
+      if (timeline.length > 0 && timeline[timeline.length - 1] > 60) {
+        const top = timeline[timeline.length - 1];
+        Plotly.relayout(sensor, { 'xaxis.range': [top - 60, top] });
+      }
+
+      var values = [];
+      columns.forEach(label => values.push(element.data[label]));
+      Plotly.restyle(sensor, { x: Array(columns.length).fill(timeline), y: values });
+    }
+
+    function digit(sensor) {
+      const value = NiclaSenseME[sensor].data[sensor].latest();
+      const div = document.getElementById(sensor + "-value");
+      if (div && !Number.isNaN(value) && value !== undefined) div.innerHTML = Math.round(value * 10) / 10;
+    }
+
+    function update3d() {
+      if (!arduinoModel || !NiclaSenseME['quaternion'].data.x.length) return;
+      var x = NiclaSenseME['quaternion'].data.x.latest();
+      var y = NiclaSenseME['quaternion'].data.y.latest();
+      var z = NiclaSenseME['quaternion'].data.z.latest();
+      var w = NiclaSenseME['quaternion'].data.w.latest();
+
       const quaternion = new THREE.Quaternion(x, y, z, w);
       quaternion.normalize();
       arduinoModel.setRotationFromQuaternion(quaternion);
-
       renderer.render(scene, camera);
-      var rotation = new THREE.Euler().setFromQuaternion(quaternion, 'XYZ');
 
-      document.getElementById('xQuaternion').innerHTML = "x: " + Math.round(rotation.x * 180 / Math.PI + 180);
-      document.getElementById('yQuaternion').innerHTML = "y: " + Math.round(rotation.y * 180 / Math.PI + 180);
-      document.getElementById('zQuaternion').innerHTML = "z: " + Math.round(rotation.z * 180 / Math.PI + 180);
+      var rot = new THREE.Euler().setFromQuaternion(quaternion, 'XYZ');
+      document.getElementById('xQuaternion').innerHTML = "x: " + Math.round(rot.x * 180 / Math.PI + 180);
+      document.getElementById('yQuaternion').innerHTML = "y: " + Math.round(rot.y * 180 / Math.PI + 180);
+      document.getElementById('zQuaternion').innerHTML = "z: " + Math.round(rot.z * 180 / Math.PI + 180);
     }
-  }
 
-  function bytes() {
-    if (bytesReceived > bytesPrevious) {
-      bytesPrevious = bytesReceived;
-      msg(bytesReceived + " bytes received");
-    }
-  }
-
-  var skip_frame = false;
-  function draw() {
-    function updateViz(sensor, fns) {
-      if (NiclaSenseME[sensor].rendered == false) { 
-        fns.forEach(function (fn) {
-          fn(sensor);
-        });
-        NiclaSenseME[sensor].rendered = true;
+    var skip_frame = false;
+    function draw() {
+      function updateViz(sensor, fns) {
+        if (NiclaSenseME[sensor].rendered == false) { fns.forEach(fn => fn(sensor)); NiclaSenseME[sensor].rendered = true; }
       }
-    }
-    if (skip_frame == false) { 
-      updateViz('accelerometer', [graph]);
-      updateViz('gyroscope', [graph]);
-      updateViz('temperature', [digit, graph]);
-      updateViz('humidity', [digit, graph]);
-      updateViz('pressure', [digit, graph]);
-      updateViz('bsec', [digit, graph]);
-      updateViz('co2', [digit, graph]);
-      updateViz('gas', [digit, graph]);
-      updateViz('quaternion', [update3d]);
-
-      skip_frame = true; 
-    } else { skip_frame = false; }
-    requestAnimationFrame(draw);
-  }
-
-  function downloadCSV(filename, content) {
-    const blob = new Blob([content], { type: 'text/csv' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = filename;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
-  }
-
-function generateCSV(sampleInterval) {
-    const now = Date.now();
-
-    const fieldNames = [];
-    for (const sensor in NiclaSenseME) {
-      const sensorData = NiclaSenseME[sensor]?.data;
-      if (!sensorData) continue;
-      for (const field in sensorData) {
-        const columnName = `${sensor}_${field}`;
-        if (!fieldNames.includes(columnName)) fieldNames.push(columnName);
-      }
+      if (skip_frame == false) {
+        updateViz('accelerometer', [graph]);
+        updateViz('gyroscope', [graph]);
+        updateViz('temperature', [digit, graph]);
+        updateViz('quaternion', [update3d]);
+        skip_frame = true;
+      } else { skip_frame = false; }
+      requestAnimationFrame(draw);
     }
 
-    let csv = 'timestamp,' + fieldNames.join(',') + '\n';
-    
-    // Find the total number of samples actually stored in memory
-    const numSamples = Math.max(
-      ...Object.values(NiclaSenseME)
-        .map(sensor => {
-          const sensorData = sensor?.data;
-          if (!sensorData) return 0;
-          return Math.max(...Object.values(sensorData).map(arr => arr.length));
-        })
-    );
+    // High-volume long-term asynchronous storage data builder for parsing into a clean CSV format
+    function exportDatabaseToCSV() {
+      if (!db) return;
+      snack("Parsing long-term telemetry log array context... Please wait.", 0);
+      const tx = db.transaction(["telemetry_logs"], "readonly");
+      const store = tx.objectStore("telemetry_logs");
+      const cursorRequest = store.openCursor();
+      let csvRows = [["Timestamp_ISO", "Elapsed_Seconds", "Sensor", "X_or_Value", "Y", "Z"]];
 
-    for (let i = numSamples - 1; i >= 0; i--) {
-      const timestamp = new Date(now - (numSamples - 1 - i) * sampleInterval).toISOString();
-      const row = [timestamp];
-
-      fieldNames.forEach(name => {
-        const [sensor, field] = name.split('_');
-        const arr = NiclaSenseME[sensor]?.data?.[field];
-        if (arr && arr.length > numSamples - i - 1) {
-          const value = arr[arr.length - numSamples + i];
-          row.push(value);
+      cursorRequest.onsuccess = function(e) {
+        const cursor = e.target.result;
+        if (cursor) {
+          const row = cursor.value;
+          const iso = new Date(row.timestamp).toISOString();
+          const sec = ((row.timestamp - sessionStartTime)/1000).toFixed(3);
+          if (row.sensor === 'accelerometer') csvRows.push([iso, sec, row.sensor, row.Ax, row.Ay, row.Az]);
+          else if (row.sensor === 'gyroscope') csvRows.push([iso, sec, row.sensor, row.x, row.y, row.z]);
+          else if (row.sensor === 'temperature') csvRows.push([iso, sec, row.sensor, row.temperature, "", ""]);
+          cursor.continue();
         } else {
-          row.push('');
+          let outputText = csvRows.map(r => r.join(",")).join("\n");
+          const blob = new Blob([outputText], { type: 'text/csv;charset=utf-8;' });
+          const a = document.createElement('a');
+          a.href = URL.createObjectURL(blob);
+          a.setAttribute('download', `Telemetry_Capture_${new Date().toISOString().replace(/[:.]/g, '-')}.csv`);
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+          snack("Export compiled completely!", 0);
         }
-      });
-      csv += row.join(',') + '\n';
-    }
-    return csv;
-  }
-  
-  document.addEventListener('DOMContentLoaded', function () {
-    pairButton = document.getElementById('pairButton');
-    BLEstatus = document.getElementById('bluetooth');
-    snackBar = document.getElementById('snackbar');
-    rateSelect = document.getElementById('rateSelect');
-    customRateInput = document.getElementById('customRateInput');
-
-    snack('IMPORTANT - first upload the sketch to your Arduino Nicla Sense ME', 1);
-
-    // Dropdown change listener
-    rateSelect.addEventListener('change', function(e) {
-      const val = e.target.value;
-      if (val === 'custom') {
-        rateSelect.style.display = 'none';
-        customRateInput.classList.remove('hidden');
-        customRateInput.focus();
-      } else {
-        setPollingInterval(parseInt(val));
-      }
-    });
-
-    // Custom Input listener (Enter key or blur)
-    function handleCustomInput() {
-      const val = parseInt(customRateInput.value);
-      if (val > 0) {
-        setPollingInterval(val);
-        // Reset UI
-        customRateInput.classList.add('hidden');
-        rateSelect.style.display = 'inline-block';
-        // Add option if it doesn't exist, or just select Custom visually? 
-        // For simplicity, we just switch back to the dropdown but keep logic running
-        // Or we can leave the input visible. Let's toggle back for cleaner UI.
-        rateSelect.value = 'custom'; 
-        rateSelect.style.display = 'inline-block';
-        customRateInput.classList.add('hidden');
-        snack(`Polling rate set to ${val}ms`, 0);
-      }
+      };
     }
 
-    customRateInput.addEventListener('blur', function() {
-       if(customRateInput.value === "") {
-         // Cancelled, go back
-         customRateInput.classList.add('hidden');
-         rateSelect.style.display = 'inline-block';
-         rateSelect.value = "20"; // Default back to 50hz
-       } else {
-         handleCustomInput();
-       }
-    });
-
-    customRateInput.addEventListener('keypress', function (e) {
-      if (e.key === 'Enter') {
-        handleCustomInput();
-      }
-    });
-
-    function isIOS() {
-      return /iPad|iPhone|iPod/.test(navigator.userAgent) ||
-             (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
-    }
-
-    if (isIOS() && !navigator.bluetooth) {
-      snack("Web Bluetooth on iPad requires specific setup.", 1);
-    }
-
-    if (navigator.bluetooth && typeof navigator.bluetooth.requestDevice === "function") {
-      pairButton.addEventListener('click', function (event) {
-        connect();
-      });
-    } else {
-      msg("browser not supported");
-      snack("Error: This browser doesn't support Web Bluetooth.", 1);
-    }
-
-    document.getElementById('exportButton').addEventListener('click', async () => {
-      // Pass the polling interval, generateCSV will automatically grab everything
-      const csvData = generateCSV(currentPollingInterval);
+    document.addEventListener('DOMContentLoaded', async () => {
+      await initDatabase();
       
-      // Add a timestamp to the filename so you don't overwrite older files
-      const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
-      const filename = `NiclaData_${timestamp}.csv`;
-      
-      downloadCSV(filename, csvData);
-      snack(`Exported all available data`, 0);
+      const plotViewSelect = document.getElementById('plotViewSelect');
+      const panelsMap = {
+        'accelerometer': 'acc-plot-panel', 'gyroscope': 'gyro-plot-panel',
+        'temperature': 'temp-plot-panel', 'force': 'force-plot-panel'
+      };
+
+      plotViewSelect.addEventListener('change', (e) => {
+        Object.keys(panelsMap).forEach(key => {
+          const block = document.getElementById(panelsMap[key]);
+          if(e.target.value === key) block.classList.remove('hidden');
+          else block.classList.add('hidden');
+        });
+      });
+
+      const rateSelect = document.getElementById('rateSelect');
+      const customRateInput = document.getElementById('customRateInput');
+      rateSelect.addEventListener('change', (e) => {
+        if(e.target.value === 'custom') customRateInput.classList.remove('hidden');
+        else customRateInput.classList.add('hidden');
+      });
+
+      document.getElementById('exportButton').addEventListener('click', exportDatabaseToCSV);
+      if ("bluetooth" in navigator) pairButton.addEventListener('click', connect);
+
+      initGraph('gyroscope');
+      initGraph('accelerometer');
+      initGraph('temperature');
+      initForceGraph();
+      init3D();
+      requestAnimationFrame(draw);
     });
-
-    initGraph('gyroscope');
-    initGraph('accelerometer');
-    initGraph('temperature');
-    initGraph('humidity');
-    initGraph('pressure');
-    initGraph('bsec');
-    initGraph('co2');
-    initGraph('gas');
-
-    init3D();
-    requestAnimationFrame(draw);
-  });
-
-</script>
+  </script>
+</body>
 
 </html>
