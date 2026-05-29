@@ -3018,10 +3018,10 @@
 		(in_bom yes)
 		(on_board yes)
 		(property "Reference" "P1110B"
-			(at -2.032 0.254 0)
+			(at 0.508 -0.254 90)
 			(effects
 				(font
-					(size 1.27 1.27)
+					(size 1.905 1.905)
 				)
 			)
 		)
@@ -3062,8 +3062,8 @@
 		)
 		(symbol "P1110b_0_1"
 			(rectangle
-				(start -11.43 10.16)
-				(end 10.16 -10.16)
+				(start -10.16 10.16)
+				(end 11.43 -10.16)
 				(stroke
 					(width 0)
 					(type default)
@@ -3075,7 +3075,7 @@
 		)
 		(symbol "P1110b_1_1"
 			(pin input line
-				(at -13.97 7.62 0)
+				(at -12.7 7.62 0)
 				(length 2.54)
 				(name "LI"
 					(effects
@@ -3093,7 +3093,7 @@
 				)
 			)
 			(pin input line
-				(at -13.97 3.81 0)
+				(at -12.7 3.81 0)
 				(length 2.54)
 				(name "GND"
 					(effects
@@ -3111,7 +3111,7 @@
 				)
 			)
 			(pin input line
-				(at -13.97 0 0)
+				(at -12.7 0 0)
 				(length 2.54)
 				(name "RFin"
 					(effects
@@ -3129,7 +3129,7 @@
 				)
 			)
 			(pin input line
-				(at -13.97 -3.81 0)
+				(at -12.7 -3.81 0)
 				(length 2.54)
 				(name "GND"
 					(effects
@@ -3147,7 +3147,7 @@
 				)
 			)
 			(pin input line
-				(at -13.97 -7.62 0)
+				(at -12.7 -7.62 0)
 				(length 2.54)
 				(name "Dset"
 					(effects
@@ -3165,7 +3165,7 @@
 				)
 			)
 			(pin output line
-				(at 7.62 7.62 0)
+				(at 13.97 7.62 180)
 				(length 2.54)
 				(name "ALK"
 					(effects
@@ -3183,7 +3183,7 @@
 				)
 			)
 			(pin output line
-				(at 7.62 3.81 0)
+				(at 13.97 3.81 180)
 				(length 2.54)
 				(name "Dout"
 					(effects
@@ -3201,7 +3201,7 @@
 				)
 			)
 			(pin output line
-				(at 7.62 0 0)
+				(at 13.97 0 180)
 				(length 2.54)
 				(name "Vout"
 					(effects
@@ -3219,7 +3219,7 @@
 				)
 			)
 			(pin output line
-				(at 7.62 -3.81 0)
+				(at 13.97 -3.81 180)
 				(length 2.54)
 				(name "GND"
 					(effects
@@ -3237,7 +3237,7 @@
 				)
 			)
 			(pin output line
-				(at 7.62 -7.62 0)
+				(at 13.97 -7.62 180)
 				(length 2.54)
 				(name "Vset"
 					(effects

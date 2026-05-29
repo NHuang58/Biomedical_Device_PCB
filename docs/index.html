@@ -276,6 +276,7 @@
       });
     }
 
+    // Call to Database to record data
     function commitRecordToDB(record) {
       if (!db) return;
       const tx = db.transaction(["telemetry_logs"], "readwrite");
