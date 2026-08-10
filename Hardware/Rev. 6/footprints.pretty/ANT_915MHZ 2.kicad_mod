@@ -1,0 +1,319 @@
+(footprint "ANT_915MHZ"
+	(version 20241229)
+	(generator "pcbnew")
+	(generator_version "9.0")
+	(layer "F.Cu")
+	(property "Reference" "REF**"
+		(at -9.825 -5.635 0)
+		(layer "F.SilkS")
+		(uuid "0adccb8a-05f0-4776-85ed-59ef4def80e3")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Value" "XDCR_ANT-916-HETH"
+		(at -2.205 5.635 0)
+		(layer "F.Fab")
+		(uuid "25ed6ef7-206a-4b26-84e7-9709b0c4dbbe")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Datasheet" ""
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "d2b7a7fc-d43e-4588-988c-c7556485fca7")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Description" ""
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "4dbaf847-88af-4d73-9c55-e375590c6276")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(attr smd)
+	(fp_line
+		(start -13.35 -4.45)
+		(end -13.35 -2.87)
+		(stroke
+			(width 0.127)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "5bde9270-072d-4a95-8eee-252fb3d8e915")
+	)
+	(fp_line
+		(start -13.35 -4.45)
+		(end 13.35 -4.45)
+		(stroke
+			(width 0.127)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "26a554b7-bf21-40cc-a19c-0dd5e0e95dcb")
+	)
+	(fp_line
+		(start -13.35 4.45)
+		(end -13.35 2.87)
+		(stroke
+			(width 0.127)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "ea6a418b-b9c5-4a12-b967-d2ec7f62017e")
+	)
+	(fp_line
+		(start 13.35 -4.45)
+		(end 13.35 -2.87)
+		(stroke
+			(width 0.127)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "c3b7f5a8-de06-4b43-b03e-e368b00f1961")
+	)
+	(fp_line
+		(start 13.35 4.45)
+		(end -13.35 4.45)
+		(stroke
+			(width 0.127)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "88ab1843-67d6-4635-8080-962f76d05025")
+	)
+	(fp_line
+		(start 13.35 4.45)
+		(end 13.35 2.87)
+		(stroke
+			(width 0.127)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "cca4e85a-fa63-437c-b12b-0cde3edcf0a6")
+	)
+	(fp_circle
+		(center -15.73 0)
+		(end -15.63 0)
+		(stroke
+			(width 0.2)
+			(type solid)
+		)
+		(fill no)
+		(layer "F.SilkS")
+		(uuid "191a5229-3536-4a1b-9c9f-84e0fbf31860")
+	)
+	(fp_line
+		(start -14.35 -4.7)
+		(end 14.35 -4.7)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(layer "F.CrtYd")
+		(uuid "047ddf35-b593-46b0-b563-dba8bc225075")
+	)
+	(fp_line
+		(start -14.35 4.7)
+		(end -14.35 -4.7)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(layer "F.CrtYd")
+		(uuid "e5710c3c-9831-4efc-a2a3-d63c8b95171e")
+	)
+	(fp_line
+		(start 14.35 -4.7)
+		(end 14.35 4.7)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(layer "F.CrtYd")
+		(uuid "1d7b950d-91df-4258-8953-5fbdbab7de2c")
+	)
+	(fp_line
+		(start 14.35 4.7)
+		(end -14.35 4.7)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(layer "F.CrtYd")
+		(uuid "cf950353-0a55-46da-a019-ce7bd916816f")
+	)
+	(fp_line
+		(start -13.35 -4.45)
+		(end 13.35 -4.45)
+		(stroke
+			(width 0.127)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "fed4a8d3-8348-4085-9a79-c59a46e36fb9")
+	)
+	(fp_line
+		(start -13.35 4.45)
+		(end -13.35 -4.45)
+		(stroke
+			(width 0.127)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "6db83b7e-c42c-4cbb-b75b-4dc2a99a8fd0")
+	)
+	(fp_line
+		(start 13.35 -4.45)
+		(end 13.35 4.45)
+		(stroke
+			(width 0.127)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "2068457b-3abc-4332-a773-aa07c1000939")
+	)
+	(fp_line
+		(start 13.35 4.45)
+		(end -13.35 4.45)
+		(stroke
+			(width 0.127)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "6425fc69-44b8-4930-9903-87c590a43f3d")
+	)
+	(fp_circle
+		(center -15.73 0)
+		(end -15.63 0)
+		(stroke
+			(width 0.2)
+			(type solid)
+		)
+		(fill no)
+		(layer "F.Fab")
+		(uuid "5bada28a-3850-4ab0-8264-8d5a903b5725")
+	)
+	(pad "1_1" thru_hole circle
+		(at -12.7 0)
+		(size 2.286 2.286)
+		(drill 1.524)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+		(solder_mask_margin 0.102)
+		(uuid "3256016a-80ed-420e-bbb1-0638f8132f78")
+	)
+	(pad "1_2" smd rect
+		(at -12.7 0)
+		(size 2.8 5.1)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(solder_mask_margin 0.102)
+		(uuid "727fd2a1-ca4a-4d81-9787-5e31913bf5fc")
+	)
+	(pad "2_1" thru_hole circle
+		(at 12.7 0)
+		(size 2.286 2.286)
+		(drill 1.524)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+		(solder_mask_margin 0.102)
+		(uuid "1782b59d-5a93-4b70-bf64-867bdceba6b9")
+	)
+	(pad "2_2" smd rect
+		(at 12.7 0)
+		(size 2.8 5.1)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(solder_mask_margin 0.102)
+		(uuid "990a6a76-8133-442d-96bc-deb46fa1e2e9")
+	)
+	(zone
+		(net 0)
+		(net_name "")
+		(layer "F.Cu")
+		(uuid "84135521-9e5f-41e3-a090-e10542fcd036")
+		(hatch full 0.508)
+		(connect_pads
+			(clearance 0)
+		)
+		(min_thickness 0.01)
+		(filled_areas_thickness no)
+		(keepout
+			(tracks not_allowed)
+			(vias not_allowed)
+			(pads not_allowed)
+			(copperpour not_allowed)
+			(footprints allowed)
+		)
+		(placement
+			(enabled no)
+			(sheetname "")
+		)
+		(fill
+			(thermal_gap 0.508)
+			(thermal_bridge_width 0.508)
+		)
+		(polygon
+			(pts
+				(xy -13.35 -2.55) (xy -13.35 -4.445) (xy 13.35 -4.445) (xy 13.35 -2.55) (xy 11.3 -2.55) (xy 11.3 2.55)
+				(xy 13.35 2.55) (xy 13.35 4.445) (xy -13.35 4.445) (xy -13.35 2.55) (xy -11.3 2.55) (xy -11.3 -2.55)
+			)
+		)
+	)
+	(zone
+		(net 0)
+		(net_name "")
+		(layers "F.Cu" "B.Cu" "In1.Cu" "In2.Cu" "In3.Cu" "In4.Cu" "In5.Cu" "In6.Cu"
+			"In7.Cu" "In8.Cu" "In9.Cu" "In10.Cu" "In11.Cu" "In12.Cu" "In13.Cu" "In14.Cu"
+			"In15.Cu" "In16.Cu" "In17.Cu" "In18.Cu" "In19.Cu" "In20.Cu" "In21.Cu"
+			"In22.Cu" "In23.Cu" "In24.Cu" "In25.Cu" "In26.Cu" "In27.Cu" "In28.Cu"
+			"In29.Cu" "In30.Cu"
+		)
+		(uuid "6e26bbe0-95af-4daf-af94-10969cf0a4d6")
+		(hatch full 0.508)
+		(connect_pads
+			(clearance 0)
+		)
+		(min_thickness 0.01)
+		(filled_areas_thickness no)
+		(keepout
+			(tracks allowed)
+			(vias not_allowed)
+			(pads allowed)
+			(copperpour allowed)
+			(footprints allowed)
+		)
+		(placement
+			(enabled no)
+			(sheetname "")
+		)
+		(fill
+			(thermal_gap 0.508)
+			(thermal_bridge_width 0.508)
+		)
+		(polygon
+			(pts
+				(xy -13.35 -2.55) (xy -13.35 -4.445) (xy 13.35 -4.445) (xy 13.35 -2.55) (xy 11.3 -2.55) (xy 11.3 2.55)
+				(xy 13.35 2.55) (xy 13.35 4.445) (xy -13.35 4.445) (xy -13.35 2.55) (xy -11.3 2.55) (xy -11.3 -2.55)
+			)
+		)
+	)
+	(embedded_fonts no)
+)
